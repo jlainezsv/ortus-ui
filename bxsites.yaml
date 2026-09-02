@@ -1,6 +1,7 @@
 name: "ORTUS UI"
 description: "Front-End Documentation"
 baseURL: "/"
+site_url: "https://jlainezsv.github.io/ortus-ui/"
 theme:
   theme: { name: material }
   options: {}
@@ -9,6 +10,6 @@ nav: []
 markdown: {}
 deployments:
   github:
-    provider: github
+    provider: github-pages
     repository: jlainezsv/ortus-ui
     branch: gh-pages

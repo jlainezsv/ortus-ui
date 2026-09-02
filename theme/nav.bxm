@@ -84,7 +84,8 @@
     }
 
     basePath = structKeyExists( variables, "basePath" ) ? variables.basePath : "";
-    if ( basePath == "/" ) basePath = "";
+    // nav antepone "/" a cada url, así que la raíz va sin barra final
+    basePath = reReplace( basePath, "/$", "" );
 
     currentCanonicalUrl = structKeyExists( variables, "page" ) && structKeyExists( variables.page, "urlPath" ) ? variables.page.urlPath : "";
     navNodesList = structKeyExists( variables, "nav" ) && isArray( variables.nav ) ? variables.nav : [];

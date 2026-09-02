@@ -65,11 +65,19 @@
     
     hasSummary = len( pageSummary ) > 0;
 
-    basePath = structKeyExists( variables, "basePath" ) ? variables.basePath : "";
-    if ( basePath == "/" ) {
-        basePath = "";
+    // 1. Raíz normalizada por el layout (local "/" vs GitHub Pages "/ortus-ui/")
+    if ( !structKeyExists( variables, "basePath" ) || !len( variables.basePath ) ) {
+        variables.basePath = "/";
     }
-    boxlangUrl = basePath & "/boxlang/index.html";
+
+    // 2. Mapeo seguro de URLs principales del Hub
+    if ( right( variables.basePath, 1 ) == "/" ) {
+        boxlangUrl = variables.basePath & "boxlang/index.html";
+    } else {
+        boxlangUrl = variables.basePath & "/boxlang/index.html";
+    }
+
+    basePath = variables.basePath;
 
     if ( !isHome && len( cleanRelPath ) ) {
         pageBreadcrumbs = buildFallbackBreadcrumbs( cleanRelPath, rawPageTitle );

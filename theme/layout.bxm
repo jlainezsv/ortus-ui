@@ -1,3 +1,21 @@
+<bx:script>
+	// Raíz del sitio según entorno: local "/" vs GitHub Pages "/ortus-ui/".
+	// site_url siempre apunta a github.io, así que el entorno se decide por la env var de CI.
+	env = server.system.environment;
+	isProd = ( structKeyExists( env, "GITHUB_ACTIONS" ) && env.GITHUB_ACTIONS == "true" )
+		|| ( structKeyExists( env, "BXSITES_ENV" ) && env.BXSITES_ENV == "production" );
+
+	siteUrl = "";
+	if ( structKeyExists( variables, "site_url" ) ) {
+		siteUrl = variables.site_url;
+	} else if ( structKeyExists( variables, "siteConfig" ) && structKeyExists( variables.siteConfig, "site_url" ) ) {
+		siteUrl = variables.siteConfig.site_url;
+	}
+
+	variables.basePath = ( isProd && findNoCase( "github.io", siteUrl ) gt 0 ) ? "/ortus-ui/" : "/";
+	basePath = variables.basePath;
+</bx:script>
+
 <bx:output>
 <!DOCTYPE html>
 <html lang="en" class="dark">
