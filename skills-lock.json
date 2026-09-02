@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "skills": {
+    "bx-sites-actions": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-actions/SKILL.md",
+      "computedHash": "e827a0d4877ff6189188f8b4d5bbe0a1d27980569f983c36b763c129350ac66b"
+    },
+    "bx-sites-blog-versioning-i18n": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-blog-versioning-i18n/SKILL.md",
+      "computedHash": "6a317794eced5a1e4adf13fe58128393eaeb88a34b8b879747d5dbb44c493814"
+    },
+    "bx-sites-build": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-build/SKILL.md",
+      "computedHash": "b8758202a28619d1f20c628b2eb2f4a10c4f5580773b5b738db8787b932071f3"
+    },
+    "bx-sites-configuration": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-configuration/SKILL.md",
+      "computedHash": "c36e2846026ae14d5fabb518d66d3f7021a0014ec0f552313e0659dc3bf7c227"
+    },
+    "bx-sites-content-quality": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-content-quality/SKILL.md",
+      "computedHash": "f6321ff15d5fb057fc167d8a04262534a01ef066be565db22c7f375a8a5a9ffe"
+    },
+    "bx-sites-deployment": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-deployment/SKILL.md",
+      "computedHash": "64f6177f3a3052954792d9d98fe9b1adfbb7b0d169f33838dfe97a51f1d5bdf6"
+    },
+    "bx-sites-getting-started": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-getting-started/SKILL.md",
+      "computedHash": "adead37ee92eda1547394974a732ecbc9592c63b8905dddba9dd247428f0a3fd"
+    },
+    "bx-sites-plugins": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-plugins/SKILL.md",
+      "computedHash": "729d6fce06cf6eb28dc4ef92f9fa4b9f9bab49b0e111e9776521c8c716bfdcba"
+    },
+    "bx-sites-search": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-search/SKILL.md",
+      "computedHash": "df14893aab4f0d03a4efcf50c9120139c25f3344f012e546ade6a9acc7a51891"
+    },
+    "bx-sites-themes": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-themes/SKILL.md",
+      "computedHash": "bc5a6f918bd1896f7b98de2b507f7c64d0bdb12a340d0f816900b8841f111caa"
+    },
+    "bx-sites-variables-functions": {
+      "source": "ortus-boxlang/bx-sites-skills",
+      "sourceType": "github",
+      "skillPath": "skills/bx-sites-variables-functions/SKILL.md",
+      "computedHash": "7ae4d630544e68bee77b0278c17e395fd7e05bee15209e7d92dbb7629dc08e20"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+name: "ORTUS UI"
+description: "Front-End Documentation"
+baseURL: "/"
+theme:
+  theme: { name: material }
+  options: {}
+search: true
+nav: []
+markdown: {}

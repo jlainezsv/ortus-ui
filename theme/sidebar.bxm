@@ -1,0 +1,50 @@
+<bx:script>
+    function buildTocTree( required array flatToc ) {
+        var tree = [];
+        var stack = [];
+        for ( var node in arguments.flatToc ) {
+            var level = structKeyExists( node, "level" ) ? node.level : 1;
+            var treeNode = {
+                id: node.id,
+                text: node.text,
+                level: level,
+                children: []
+            };
+            while ( stack.len() > 0 && stack[ stack.len() ].level >= level ) {
+                stack.deleteAt( stack.len() );
+            }
+            if ( stack.len() == 0 ) {
+                tree.append( treeNode );
+            } else {
+                stack[ stack.len() ].children.append( treeNode );
+            }
+            stack.append( treeNode );
+        }
+        return tree;
+    }
+
+    function renderTocNodes( required array nodes, boolean isRoot = true ) {
+        var html = '';
+        if ( arguments.isRoot ) {
+            html &= '<ul class="space-y-2 border-l border-slate-200 pl-4 text-sm dark:border-white/10" role="list">';
+        } else {
+            html &= '<ul class="mt-2 ml-3 space-y-1 text-xs" role="list">';
+        }
+        for ( var node in arguments.nodes ) {
+            html &= '<li>';
+            var href = "##" & node.id;
+            html &= '<a href="' & href & '" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">' & encodeForHTML(node.text) & '</a>';
+            if ( node.children.len() ) {
+                html &= renderTocNodes( node.children, false );
+            }
+            html &= '</li>';
+        }
+        return html & '</ul>';
+    }
+
+    pageTocList = structKeyExists( variables, "page" ) && structKeyExists( variables.page, "toc" ) && isArray( variables.page.toc ) ? variables.page.toc : [];
+    tocTree = buildTocTree( pageTocList );
+    if ( tocTree.len() ) {
+        writeOutput( renderTocNodes( tocTree, true ) );
+    }
+</bx:script>

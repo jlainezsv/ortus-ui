@@ -1,0 +1,131 @@
+<bx:script>
+    function renderNavTree( required array nodes, string basePath = "", string currentUrl = "", numeric maxDepth = 0, numeric currentDepth = 1 ) {
+        var html = '<ul class="space-y-1">';
+        for ( var node in arguments.nodes ) {
+            html &= '<li>';
+            var nodeUrl = structKeyExists( node, "url" ) ? node.url : "";
+            var nodeTitle = structKeyExists( node, "title" ) ? node.title : "";
+            var nodeChildren = structKeyExists( node, "children" ) && isArray( node.children ) ? node.children : [];
+
+            if ( len( trim( nodeUrl ) ) ) {
+                var isActive = len( arguments.currentUrl ) && nodeUrl == arguments.currentUrl;
+                var activeClass = isActive
+                    ? 'bg-emerald-400/10 font-medium text-emerald-300'
+                    : 'text-slate-400 hover:bg-white/5 hover:text-white';
+                var ariaCurrent = isActive ? ' aria-current="page"' : '';
+
+                var cleanUrl = ( left( nodeUrl, 1 ) == "/" ) ? nodeUrl : "/" & nodeUrl;
+                var linkHref = arguments.basePath & cleanUrl;
+
+                html &= '<a href="' & linkHref & '" class="block rounded-lg px-3 py-2 text-sm ' & activeClass & '"' & ariaCurrent & '>' & encodeForHTML(nodeTitle) & '</a>';
+            } else {
+                html &= '<div class="mb-2 mt-4 px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">' & encodeForHTML(nodeTitle) & '</div>';
+            }
+
+            var canRecurse = arguments.maxDepth == 0 || arguments.currentDepth lt arguments.maxDepth;
+            if ( canRecurse && nodeChildren.len() ) {
+                html &= renderNavTree( nodeChildren, arguments.basePath, arguments.currentUrl, arguments.maxDepth, arguments.currentDepth + 1 );
+            }
+            html &= '</li>';
+        }
+        return html & '</ul>';
+    }
+
+    function filterNavBySection( required array navTree, required string sectionName ) {
+        if ( !len( arguments.sectionName ) ) {
+            return arguments.navTree;
+        }
+        var sectionSlug = lCase( trim( arguments.sectionName ) );
+        for ( var node in arguments.navTree ) {
+            var nodeUrl = structKeyExists( node, "url" ) ? node.url : "";
+            var nodeTitle = structKeyExists( node, "title" ) ? node.title : "";
+            if ( len( nodeUrl ) ) {
+                var lowerUrl = lCase( nodeUrl );
+                var matchIndexHtml = lowerUrl == sectionSlug & "/index.html";
+                var matchIndex = lowerUrl == sectionSlug & "/index";
+                var matchExact = lowerUrl == sectionSlug;
+                var matchSlash = lowerUrl == sectionSlug & "/";
+                if ( matchIndexHtml || matchIndex || matchExact || matchSlash ) {
+                    var nodeChildren = structKeyExists( node, "children" ) && isArray( node.children ) ? node.children : [];
+                    if ( nodeChildren.len() ) {
+                        var sectionLink = { title : nodeTitle, url : nodeUrl, order : 0, icon : "", children : [] };
+                        var result = [];
+                        result.append( sectionLink );
+                        for ( var child in nodeChildren ) {
+                            result.append( child );
+                        }
+                        return result;
+                    }
+                    return arguments.navTree;
+                }
+            }
+            var nodeChildren = structKeyExists( node, "children" ) && isArray( node.children ) ? node.children : [];
+            if ( nodeChildren.len() ) {
+                var found = filterNavBySection( nodeChildren, arguments.sectionName );
+                if ( found.len() ) {
+                    var isOriginalTree = ( found.len() == arguments.navTree.len() );
+                    if ( isOriginalTree ) {
+                        var isSame = true;
+                        for ( var fi = 1; fi <= found.len(); fi++ ) {
+                            if ( found[ fi ] != arguments.navTree[ fi ] ) {
+                                isSame = false;
+                                break;
+                            }
+                        }
+                        if ( isSame ) {
+                            continue;
+                        }
+                    }
+                    return found;
+                }
+            }
+        }
+        return arguments.navTree;
+    }
+
+    basePath = structKeyExists( variables, "basePath" ) ? variables.basePath : "";
+    if ( basePath == "/" ) basePath = "";
+
+    currentCanonicalUrl = structKeyExists( variables, "page" ) && structKeyExists( variables.page, "urlPath" ) ? variables.page.urlPath : "";
+    navNodesList = structKeyExists( variables, "nav" ) && isArray( variables.nav ) ? variables.nav : [];
+
+    pageRelPath = structKeyExists( variables, "page" ) && structKeyExists( variables.page, "relativePath" ) ? variables.page.relativePath : "";
+    cleanPageRelPath = reReplace( pageRelPath, "^\./|^\/", "", "all" );
+    isHomePage = ( cleanPageRelPath == "index.md" );
+
+    sectionName = "";
+    if ( !isHomePage && len( cleanPageRelPath ) ) {
+        var pathParts = listToArray( cleanPageRelPath, "/" );
+        if ( pathParts.len() gt 1 ) {
+            sectionName = pathParts[ 1 ];
+        }
+    }
+
+    sidebarDepth = 0;
+    if ( isHomePage || !len( sectionName ) ) {
+        var homeNavItems = [];
+        for ( var topNode in navNodesList ) {
+            var topUrl = structKeyExists( topNode, "url" ) ? topNode.url : "";
+            if ( len( topUrl ) && topUrl != "index.html" && topUrl != "index" && topUrl != "/" ) {
+                homeNavItems.append( topNode );
+            }
+        }
+        displayNav = homeNavItems;
+        sidebarDepth = 1;
+    } else {
+        displayNav = filterNavBySection( navNodesList, sectionName );
+        sidebarDepth = 0;
+    }
+</bx:script>
+
+<bx:output>
+<nav class="space-y-4">
+    <bx:if displayNav.len()>
+        #renderNavTree( displayNav, basePath, currentCanonicalUrl, sidebarDepth )#
+    <bx:else>
+        <div class="px-3 py-2 text-xs text-slate-400">
+            No navigation found.
+        </div>
+    </bx:if>
+</nav>
+</bx:output>

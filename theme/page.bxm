@@ -1,0 +1,162 @@
+<bx:script>
+    function renderBreadcrumbs( required array crumbs ) {
+        if ( !arguments.crumbs.len() ) {
+            return "";
+        }
+        var bp = variables.basePath;
+        var html = '<nav aria-label="Breadcrumb" class="mb-4">';
+        html &= '<ol class="flex flex-wrap items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">';
+        for ( var i = 1; i <= arguments.crumbs.len(); i++ ) {
+            var crumb = arguments.crumbs[ i ];
+            var crumbTitle = structKeyExists( crumb, "title" ) ? crumb.title : "";
+            var crumbUrl = structKeyExists( crumb, "url" ) ? crumb.url : "";
+            if ( i gt 1 ) {
+                html &= '<li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li>';
+            }
+            if ( i == arguments.crumbs.len() ) {
+                html &= '<li aria-current="page" class="font-medium text-slate-900 dark:text-white">' & encodeForHTML( crumbTitle ) & '</li>';
+            } else if ( !len( crumbUrl ) ) {
+                html &= '<li><a href="' & bp & '" class="hover:text-slate-900 dark:hover:text-white transition-colors">' & encodeForHTML( crumbTitle ) & '</a></li>';
+            } else {
+                html &= '<li><a href="' & bp & crumbUrl & '" class="hover:text-slate-900 dark:hover:text-white transition-colors">' & encodeForHTML( crumbTitle ) & '</a></li>';
+            }
+        }
+        html &= '</ol></nav>';
+        return html;
+    }
+
+    function buildFallbackBreadcrumbs( required string cleanRelPath, required string pageTitleStr ) {
+        var crumbs = [];
+        var hubTitle = "Hub";
+        var hubUrl = "";
+        crumbs.append( { title : hubTitle, url : hubUrl } );
+
+        if ( len( arguments.cleanRelPath ) ) {
+            var pathParts = listToArray( arguments.cleanRelPath, "/" );
+            if ( pathParts.len() gt 1 ) {
+                var sectionSlug = pathParts[ 1 ];
+                var sectionTitle = "Overview";
+                var sectionUrl = sectionSlug & "/index.html";
+                crumbs.append( { title : sectionTitle, url : sectionUrl } );
+
+                var fileName = pathParts[ pathParts.len() ];
+                var isIndexFile = compareNoCase( fileName, "index.md" ) == 0 || compareNoCase( fileName, "index.html" ) == 0;
+                if ( !isIndexFile ) {
+                    crumbs.append( { title : pageTitleStr, url : "" } );
+                }
+            }
+        }
+        return crumbs;
+    }
+
+    pageData = structKeyExists( variables, "page" ) ? variables.page : {};
+    
+    relPath = structKeyExists( pageData, "relativePath" ) ? pageData.relativePath : "";
+    currentPageUrl = structKeyExists( pageData, "canonicalUrl" ) ? pageData.canonicalUrl : "";
+
+    cleanRelPath = reReplace( relPath, "^\./|^\/", "", "all" );
+
+    isHome = ( cleanRelPath == "index.md" );
+
+    pageTitle = encodeForHTML( structKeyExists( pageData, "title" ) ? pageData.title : "" );
+    rawPageTitle = structKeyExists( pageData, "title" ) ? pageData.title : "";
+    pageSummary = encodeForHTML( structKeyExists( pageData, "summary" ) ? pageData.summary : "" );
+    pageContentHtml = structKeyExists( pageData, "contentHtml" ) ? pageData.contentHtml : "";
+    
+    hasSummary = len( pageSummary ) > 0;
+
+    basePath = structKeyExists( variables, "basePath" ) ? variables.basePath : "";
+    if ( basePath == "/" ) {
+        basePath = "";
+    }
+    boxlangUrl = basePath & "/boxlang/index.html";
+
+    if ( !isHome && len( cleanRelPath ) ) {
+        pageBreadcrumbs = buildFallbackBreadcrumbs( cleanRelPath, rawPageTitle );
+    } else {
+        pageBreadcrumbs = [];
+    }
+
+    if ( pageBreadcrumbs.len() ) {
+        var firstCrumb = pageBreadcrumbs[ 1 ];
+        var firstUrl = structKeyExists( firstCrumb, "url" ) ? firstCrumb.url : "";
+        var isFirstHub = ( !len( firstUrl ) || firstUrl == "index.html" || firstUrl == "/" || firstUrl == basePath );
+        if ( !isFirstHub ) {
+            pageBreadcrumbs.prepend( { title : "Hub", url : "" } );
+        }
+    }
+
+    showBreadcrumbs = pageBreadcrumbs.len() gt 0 && !isHome;
+</bx:script>
+
+<bx:output>
+<bx:if isHome>
+    <div class="mx-auto max-w-5xl px-6 py-12">
+        <div class="mb-10 text-center">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">Ortus UI Documentation Hub</h1>
+            <p class="mt-3 text-base text-slate-500 dark:text-slate-400">Select a product or framework below to explore its official documentation.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            
+            <!-- Tile de BoxLang con la URL corregida -->
+            <a href="#boxlangUrl#" class="group relative flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-ortus-med hover:shadow-md dark:border-white/10 dark:bg-ortus-dark">
+                <div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-ortus-med/10 text-ortus-med dark:text-ortus-light">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                    </div>
+                    <h2 class="mt-4 text-lg font-bold text-slate-900 dark:text-white group-hover:text-ortus-med">BoxLang</h2>
+                    <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Official documentation for BoxLang syntax, components, and core guides.</p>
+                </div>
+                <div class="mt-6 flex items-center text-xs font-semibold text-ortus-med dark:text-ortus-light">
+                    <span>Explore Documentation</span>
+                    <svg class="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </div>
+            </a>
+
+            <!-- Skeleton 1 -->
+            <div class="relative flex flex-col justify-between rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 opacity-60 dark:border-white/10 dark:bg-white/[0.02]">
+                <div>
+                    <div class="h-12 w-12 animate-pulse rounded-lg bg-slate-200 dark:bg-slate-800"></div>
+                    <div class="mt-4 h-5 w-3/4 animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                    <div class="mt-3 space-y-2">
+                        <div class="h-3 w-full animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                        <div class="h-3 w-2/3 animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                    </div>
+                </div>
+                <div class="mt-6 text-xs font-medium text-slate-400">Coming Soon...</div>
+            </div>
+
+            <!-- Skeleton 2 -->
+            <div class="relative flex flex-col justify-between rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 opacity-60 dark:border-white/10 dark:bg-white/[0.02]">
+                <div>
+                    <div class="h-12 w-12 animate-pulse rounded-lg bg-slate-200 dark:bg-slate-800"></div>
+                    <div class="mt-4 h-5 w-3/4 animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                    <div class="mt-3 space-y-2">
+                        <div class="h-3 w-full animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                        <div class="h-3 w-1/2 animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                    </div>
+                </div>
+                <div class="mt-6 text-xs font-medium text-slate-400">Coming Soon...</div>
+            </div>
+
+        </div>
+    </div>
+<bx:else>
+    <article class="min-w-0 px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
+        <bx:if showBreadcrumbs>
+            <bx:output>#renderBreadcrumbs( pageBreadcrumbs )#</bx:output>
+        </bx:if>
+        <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">#pageTitle#</h1>
+            <bx:if hasSummary>
+                <p class="mt-2 text-lg text-slate-600 dark:text-slate-300">#pageSummary#</p>
+            </bx:if>
+        </header>
+
+        <div class="prose max-w-none dark:prose-invert" id="page-content">
+            #pageContentHtml#
+        </div>
+    </article>
+</bx:if>
+</bx:output>

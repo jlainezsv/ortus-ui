@@ -1,0 +1,5 @@
+/site/
+/.agents/
+.DS_Store
+Thumbs.db
+.vscode/
