@@ -1,0 +1,365 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Sidebar - ORTUS UI</title>
+
+	<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+		<meta name="description" content="Front-End&#x20;Documentation" />
+	</cfif>
+
+	<!-- Tailwind CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/bxsites.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/style.ce91db55.css"
+	/>
+
+	<!-- Highlight.js -->
+	<link rel="stylesheet" href="/assets/vendor/highlight/github.min.css" />
+
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+			theme: {
+				extend: {
+					colors: {
+						ortus: {
+							light: "#A9DD2F",
+							med: "#2DBA95",
+							dark: "#232530",
+						},
+					},
+				},
+			},
+		};
+	</script>
+</head>
+
+<body class="min-h-screen bg-white text-slate-900 antialiased dark:bg-[#0F121A] dark:text-slate-100">
+
+	<div class="min-h-screen">
+
+		<!-- ================= TOP BAR ================= -->
+		<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-[#151923]/95">
+			<div class="mx-auto flex h-16 items-center px-5 lg:px-8">
+
+				
+
+				<!-- Logo / Brand -->
+				<a href="/" class="flex items-center gap-3">
+					<div class="flex h-8 w-8 items-center justify-center">
+						<img 
+              src="/assets/theme/images/ortus-icon-full.svg" 
+              alt="Ortus Logo"
+              class="h-full w-full object-contain"
+            />
+					</div>
+
+					<div class="hidden sm:block">
+						<div class="text-sm font-semibold tracking-tight">
+							ORTUS UI
+						</div>
+						<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+							<div class="text-[11px] text-slate-500 dark:text-slate-400">
+								Front-End Documentation
+							</div>
+						</cfif>
+					</div>
+				</a>
+
+				<!-- Header Right Actions -->
+				<div class="ml-auto flex items-center gap-3">
+					<cfif structKeyExists( variables.siteConfig, "repo" ) AND isStruct( variables.siteConfig.repo ) AND structKeyExists( variables.siteConfig.repo, "url" )>
+						<a 
+							href="" 
+							target="_blank" 
+							rel="noopener noreferrer" 
+							class="hidden rounded-lg px-3 py-2 text-sm text-slate-500 hover:bg-slate-100 hover:text-slate-900 sm:block dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+						>
+							GitHub
+						</a>
+					</cfif>
+
+					<!-- Dark Mode Toggle -->
+					<button id="themeToggle" type="button" class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" aria-label="Toggle theme">
+						<svg id="moonIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+						<svg id="sunIcon" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+					</button>
+				</div>
+
+        <!-- Mobile menu toggle -->
+				<button
+					id="mobileMenuButton"
+					type="button"
+					class="mr-3 rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 lg:hidden dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+					aria-label="Open navigation"
+				>
+					☰
+				</button>
+			</div>
+		</header>
+
+		<!-- ================= PAGE CONTENT ================= -->
+		<div class="mx-auto flex">
+
+			<!-- ================= LEFT SIDEBAR (Navegación del sitio) ================= -->
+			<aside id="sidebar" class="fixed inset-y-16 left-0 z-40 hidden w-72 overflow-y-auto border-r border-slate-200 bg-white px-5 py-7 lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] dark:border-white/10 dark:bg-[#121620]">
+				
+
+
+<nav class="space-y-4">
+    
+        <ul class="space-y-1"><li><a href="/boxlang/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">BOXLANG</a></li><li><div class="mb-2 mt-4 px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">components</div><ul class="space-y-1"><li><a href="/boxlang/components/buttons/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Buttons</a></li><li><a href="/boxlang/components/cards/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Cards</a></li><li><a href="/boxlang/components/footer/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Footer</a></li><li><a href="/boxlang/components/forms/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Forms</a></li><li><a href="/boxlang/components/header/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Header</a></li><li><a href="/boxlang/components/layout/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Layout</a></li><li><a href="/boxlang/components/sidebar/index.html" class="block rounded-lg px-3 py-2 text-sm bg-emerald-400/10 font-medium text-emerald-300" aria-current="page">Sidebar</a></li><li><a href="/boxlang/components/tables/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Tables</a></li></ul></li><li><a href="/boxlang/getting-started/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Getting Started</a></li></ul>
+    
+</nav>
+
+			</aside>
+
+			<!-- ================= MAIN CONTENT & RIGHT SIDEBAR ================= -->
+			<main class="min-w-0 flex-1">
+				<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_220px]">
+
+
+					
+
+
+
+    <article class="min-w-0 px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
+        
+            <nav aria-label="Breadcrumb" class="mb-4"><ol class="flex flex-wrap items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400"><li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition-colors">Hub</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li><a href="/boxlang/index.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Overview</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li aria-current="page" class="font-medium text-slate-900 dark:text-white">Sidebar</li></ol></nav>
+        
+        <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Sidebar</h1>
+            
+                <p class="mt-2 text-lg text-slate-600 dark:text-slate-300">In-page navigation for long-form pages with automatic scroll tracking.</p>
+            
+        </header>
+
+        <div class="prose max-w-none dark:prose-invert" id="page-content">
+            <div class="bxsites-tabs" data-bxsites-tabgroup role="tablist"><div class="bxsites-tabs__nav"><button type="button" class="bxsites-tab-btn bxsites-tab-btn--active" data-bxsites-tab="1">Understand</button><button type="button" class="bxsites-tab-btn" data-bxsites-tab="2">Use</button><button type="button" class="bxsites-tab-btn" data-bxsites-tab="3">Implement</button></div><div class="bxsites-tabs__panels"><div class="bxsites-tab-panel bxsites-tab-panel--active" data-bxsites-tab="1"><svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+<symbol id="adm-tip">
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="m12.3 10c2.8-.7 4.2-3.8 2.1-7.4 8.1 3.2 7.5 18.1-2.6 18.4-8.1.2-9.8-11.4-4.4-14.8.2 3.3 2.8 4.3 4.9 3.8zm-3.2 5.8c.2 1.6 2.5 1.9 3.6 1.5 2.8-1 2.5-4 2.1-5.1-.8 1.4-1.3 1.7-2.2 2s-3.7-.7-3.5 1.6z" fill="currentColor"/>
+</svg>
+</symbol>
+</svg>
+<h3 id="overview"><a href="#overview" id="overview" name="overview" class="anchor"></a>Overview</h3>
+<p>The Sidebar is an in-page navigation component for long-form pages. It stays visible while scrolling and automatically highlights the current section using Scroll Spy.</p>
+<p>It is reusable across pages as long as the navigation links and content sections share matching anchor IDs.</p>
+<h3 id="anatomy"><a href="#anatomy" id="anatomy" name="anatomy" class="anchor"></a>Anatomy</h3>
+<p>The Sidebar has two parts connected through standard HTML anchors:</p>
+<p><strong>Navigation</strong> — A <code>&lt;nav&gt;</code> element with the <code>.sidebar</code> class containing anchor links. Each link targets a section by <code>id</code>.</p>
+<p><strong>Content sections</strong> — Sections with IDs that match the navigation link fragments.</p>
+<pre><code class="language-html">&lt;a href=&quot;#section-id&quot;&gt;Section&lt;/a&gt;
+
+&lt;section id=&quot;section-id&quot;&gt;
+  ...
+&lt;/section&gt;
+</code></pre>
+<p>Links may also include the page path. The fragment must match the target section ID.</p>
+<div class="adm-block adm-tip">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-tip" /></svg><span>Anchor relationship</span>
+</div>
+<div class="adm-body">
+<p>The <code>href</code> fragment in each navigation link must match the <code>id</code> of its target content section.</p>
+</div>
+</div>
+<h3 id="states"><a href="#states" id="states" name="states" class="anchor"></a>States</h3>
+<ul>
+<li><strong>Default</strong> — No active indicator.</li>
+<li><strong>Hover</strong> — Hover treatment without the active indicator.</li>
+<li><strong>Active</strong> — Active treatment with the existing left border. Applied automatically by Scroll Spy.</li>
+</ul>
+<p>Hover and active should remain visually distinct.</p>
+</div><div class="bxsites-tab-panel" data-bxsites-tab="2"><h3 id="when-to-use"><a href="#when-to-use" id="when-to-use" name="when-to-use" class="anchor"></a>When to use</h3>
+<p>Use the Sidebar when a page contains multiple sections that users may need to navigate directly:</p>
+<ul>
+<li>Enterprise Playbooks</li>
+<li>Documentation</li>
+<li>Long-form guides</li>
+<li>Technical pages</li>
+<li>Content-heavy pages</li>
+</ul>
+<h3 id="examples"><a href="#examples" id="examples" name="examples" class="anchor"></a>Examples</h3>
+<p>Minimal sidebar with three sections:</p>
+<pre><code class="language-html">&lt;nav class=&quot;sidebar&quot; aria-label=&quot;Documentation sections&quot;&gt;
+  &lt;a href=&quot;#getting-started&quot;&gt;Getting Started&lt;/a&gt;
+  &lt;a href=&quot;#configuration&quot;&gt;Configuration&lt;/a&gt;
+  &lt;a href=&quot;#deployment&quot;&gt;Deployment&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;section id=&quot;getting-started&quot;&gt;
+  ...
+&lt;/section&gt;
+
+&lt;section id=&quot;configuration&quot;&gt;
+  ...
+&lt;/section&gt;
+
+&lt;section id=&quot;deployment&quot;&gt;
+  ...
+&lt;/section&gt;
+</code></pre>
+<p>To add a section, add an anchor link and a matching section. No JavaScript changes are required.</p>
+</div><div class="bxsites-tab-panel" data-bxsites-tab="3"><svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+<symbol id="adm-note">
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<g fill="currentColor">
+<path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/>
+<path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/>
+</g>
+</svg>
+</symbol>
+</svg>
+<h3 id="requirements"><a href="#requirements" id="requirements" name="requirements" class="anchor"></a>Requirements</h3>
+<ul>
+<li>A <code>&lt;nav&gt;</code> element with the <code>.sidebar</code> class</li>
+<li>Navigation links with anchor targets</li>
+<li>Content sections with matching IDs</li>
+<li><code>initScrollSpy()</code> available from <code>app.js</code></li>
+</ul>
+<h3 id="code"><a href="#code" id="code" name="code" class="anchor"></a>Code</h3>
+<p><strong>Full sidebar markup</strong></p>
+<pre><code class="language-html">&lt;nav class=&quot;ps-3 sticky-top top-header sidebar&quot;&gt;
+  &lt;p class=&quot;text-secondary text-uppercase fs-8 mb-3&quot;&gt;Enterprise Playbook&lt;/p&gt;
+
+  &lt;ul class=&quot;list-unstyled d-grid gap-2 mb-0&quot;&gt;
+    &lt;li&gt;
+      &lt;a href=&quot;/page#introduction&quot; class=&quot;d-block p-2 text-white fs-7&quot;&gt;
+        Introduction
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&quot;/page#features&quot; class=&quot;d-block p-2 text-white fs-7 active&quot;&gt;
+        Features
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href=&quot;/page#pricing&quot; class=&quot;d-block p-2 text-white fs-7&quot;&gt;
+        Pricing
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre>
+<p><strong>Initialization</strong></p>
+<pre><code class="language-js">initScrollSpy('.sidebar');
+</code></pre>
+<p>No page-specific configuration is required. A new page only needs a compatible Sidebar markup and matching section IDs.</p>
+<p><strong>Suggested layout</strong></p>
+<p>The Sidebar can be used inside a two-column page layout:</p>
+<pre><code class="language-html">&lt;div class=&quot;container py-5&quot;&gt;
+  &lt;div class=&quot;row g-5&quot;&gt;
+    &lt;aside class=&quot;col-12 col-lg-3&quot;&gt;
+      &lt;!-- Sidebar --&gt;
+    &lt;/aside&gt;
+
+    &lt;main class=&quot;col-12 col-lg-9&quot;&gt;
+      &lt;section id=&quot;introduction&quot;&gt;...&lt;/section&gt;
+      &lt;hr class=&quot;my-5&quot;&gt;
+      &lt;section id=&quot;features&quot;&gt;...&lt;/section&gt;
+      &lt;hr class=&quot;my-5&quot;&gt;
+      &lt;section id=&quot;pricing&quot;&gt;...&lt;/section&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<div class="adm-block adm-note">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-note" /></svg><span>Note</span>
+</div>
+<div class="adm-body">
+<p>The layout is only a suggested implementation. The Sidebar can be used with different page structures.</p>
+</div>
+</div>
+<h3 id="accessibility"><a href="#accessibility" id="accessibility" name="accessibility" class="anchor"></a>Accessibility</h3>
+<ul>
+<li>Use a semantic <code>&lt;nav&gt;</code> element.</li>
+<li>Provide an accessible label when needed (e.g. <code>aria-label=&quot;Documentation sections&quot;</code>).</li>
+<li>Navigation links must reference valid section IDs.</li>
+</ul>
+<h3 id="technical-behavior"><a href="#technical-behavior" id="technical-behavior" name="technical-behavior" class="anchor"></a>Technical behavior</h3>
+<p>The <code>initScrollSpy()</code> function uses <code>IntersectionObserver</code> to track which section is in view:</p>
+<ol>
+<li>Finds the Sidebar using the provided selector.</li>
+<li>Reads the <code>href</code> fragment from each anchor link.</li>
+<li>Resolves the corresponding section by <code>id</code>.</li>
+<li>Observes all resolved sections.</li>
+<li>When a section enters the reading area (<code>rootMargin: '-20% 0px -70% 0px'</code>), removes <code>.active</code> from all sidebar links and applies <code>.active</code> to the matching link.</li>
+</ol>
+<p><strong>Dependencies:</strong> Native <code>IntersectionObserver</code>. Existing site CSS/Sass. No additional JavaScript libraries.</p>
+</div></div></div>
+
+        </div>
+    </article>
+
+
+
+					<!-- ================= RIGHT SIDEBAR (Table of Contents) ================= -->
+					<aside class="hidden border-l border-slate-200 px-6 py-12 xl:block dark:border-white/10">
+						<div class="sticky top-28">
+							<div class="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+								On this page
+							</div>
+							<ul class="space-y-2 border-l border-slate-200 pl-4 text-sm dark:border-white/10" role="list"><li><a href="#overview" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Overview</a></li><li><a href="#anatomy" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Anatomy</a></li><li><a href="#states" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">States</a></li><li><a href="#when-to-use" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">When to use</a></li><li><a href="#examples" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Examples</a></li><li><a href="#requirements" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Requirements</a></li><li><a href="#code" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Code</a></li><li><a href="#accessibility" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Accessibility</a></li><li><a href="#technical-behavior" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Technical behavior</a></li></ul>
+						</div>
+					</aside>
+
+
+				</div>
+			</main>
+
+		</div>
+	</div>
+
+	<!-- BxSites JS Assets -->
+	<script src="/assets/vendor/highlight/highlight.min.js"></script>
+	<script src="/assets/highlight-boxlang.js"></script>
+	<script>
+		// Highlight all fenced code blocks after Highlight.js and
+		// the custom BoxLang grammar have been loaded.
+		hljs.highlightAll();
+	</script>
+	<script src="/assets/tabs.js"></script>
+	<script src="/assets/admonition-collapse.js"></script>
+	<script src="/assets/copy-code.js"></script>
+	<script src="/assets/code-lines.js"></script>
+	<script src="/assets/prompt-init.js"></script>
+
+	<!-- Client JavaScript -->
+	<script>
+		const themeToggle = document.getElementById("themeToggle");
+		const moonIcon = document.getElementById("moonIcon");
+		const sunIcon = document.getElementById("sunIcon");
+
+		function updateThemeIcons() {
+			const isDark = document.documentElement.classList.contains("dark");
+			moonIcon.classList.toggle("hidden", !isDark);
+			sunIcon.classList.toggle("hidden", isDark);
+		}
+
+		themeToggle.addEventListener("click", () => {
+			document.documentElement.classList.toggle("dark");
+			updateThemeIcons();
+		});
+
+		const mobileMenuButton = document.getElementById("mobileMenuButton");
+		const sidebar = document.getElementById("sidebar");
+
+		mobileMenuButton.addEventListener("click", () => {
+			sidebar.classList.toggle("hidden");
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Getting Started - ORTUS UI</title>
+
+	<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+		<meta name="description" content="Front-End&#x20;Documentation" />
+	</cfif>
+
+	<!-- Tailwind CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/bxsites.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/style.ce91db55.css"
+	/>
+
+	<!-- Highlight.js -->
+	<link rel="stylesheet" href="/assets/vendor/highlight/github.min.css" />
+
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+			theme: {
+				extend: {
+					colors: {
+						ortus: {
+							light: "#A9DD2F",
+							med: "#2DBA95",
+							dark: "#232530",
+						},
+					},
+				},
+			},
+		};
+	</script>
+</head>
+
+<body class="min-h-screen bg-white text-slate-900 antialiased dark:bg-[#0F121A] dark:text-slate-100">
+
+	<div class="min-h-screen">
+
+		<!-- ================= TOP BAR ================= -->
+		<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-[#151923]/95">
+			<div class="mx-auto flex h-16 items-center px-5 lg:px-8">
+
+				
+
+				<!-- Logo / Brand -->
+				<a href="/" class="flex items-center gap-3">
+					<div class="flex h-8 w-8 items-center justify-center">
+						<img 
+              src="/assets/theme/images/ortus-icon-full.svg" 
+              alt="Ortus Logo"
+              class="h-full w-full object-contain"
+            />
+					</div>
+
+					<div class="hidden sm:block">
+						<div class="text-sm font-semibold tracking-tight">
+							ORTUS UI
+						</div>
+						<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+							<div class="text-[11px] text-slate-500 dark:text-slate-400">
+								Front-End Documentation
+							</div>
+						</cfif>
+					</div>
+				</a>
+
+				<!-- Header Right Actions -->
+				<div class="ml-auto flex items-center gap-3">
+					<cfif structKeyExists( variables.siteConfig, "repo" ) AND isStruct( variables.siteConfig.repo ) AND structKeyExists( variables.siteConfig.repo, "url" )>
+						<a 
+							href="" 
+							target="_blank" 
+							rel="noopener noreferrer" 
+							class="hidden rounded-lg px-3 py-2 text-sm text-slate-500 hover:bg-slate-100 hover:text-slate-900 sm:block dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+						>
+							GitHub
+						</a>
+					</cfif>
+
+					<!-- Dark Mode Toggle -->
+					<button id="themeToggle" type="button" class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" aria-label="Toggle theme">
+						<svg id="moonIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+						<svg id="sunIcon" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+					</button>
+				</div>
+
+        <!-- Mobile menu toggle -->
+				<button
+					id="mobileMenuButton"
+					type="button"
+					class="mr-3 rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 lg:hidden dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+					aria-label="Open navigation"
+				>
+					☰
+				</button>
+			</div>
+		</header>
+
+		<!-- ================= PAGE CONTENT ================= -->
+		<div class="mx-auto flex">
+
+			<!-- ================= LEFT SIDEBAR (Navegación del sitio) ================= -->
+			<aside id="sidebar" class="fixed inset-y-16 left-0 z-40 hidden w-72 overflow-y-auto border-r border-slate-200 bg-white px-5 py-7 lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] dark:border-white/10 dark:bg-[#121620]">
+				
+
+
+<nav class="space-y-4">
+    
+        <ul class="space-y-1"><li><a href="/boxlang/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">BOXLANG</a></li><li><div class="mb-2 mt-4 px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">components</div><ul class="space-y-1"><li><a href="/boxlang/components/buttons/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Buttons</a></li><li><a href="/boxlang/components/cards/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Cards</a></li><li><a href="/boxlang/components/footer/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Footer</a></li><li><a href="/boxlang/components/forms/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Forms</a></li><li><a href="/boxlang/components/header/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Header</a></li><li><a href="/boxlang/components/layout/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Layout</a></li><li><a href="/boxlang/components/sidebar/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Sidebar</a></li><li><a href="/boxlang/components/tables/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Tables</a></li></ul></li><li><a href="/boxlang/getting-started/index.html" class="block rounded-lg px-3 py-2 text-sm bg-emerald-400/10 font-medium text-emerald-300" aria-current="page">Getting Started</a></li></ul>
+    
+</nav>
+
+			</aside>
+
+			<!-- ================= MAIN CONTENT & RIGHT SIDEBAR ================= -->
+			<main class="min-w-0 flex-1">
+				<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_220px]">
+
+
+					
+
+
+
+    <article class="min-w-0 px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
+        
+            <nav aria-label="Breadcrumb" class="mb-4"><ol class="flex flex-wrap items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400"><li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition-colors">Hub</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li><a href="/boxlang/index.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Overview</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li aria-current="page" class="font-medium text-slate-900 dark:text-white">Getting Started</li></ol></nav>
+        
+        <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Getting Started</h1>
+            
+        </header>
+
+        <div class="prose max-w-none dark:prose-invert" id="page-content">
+            
+        </div>
+    </article>
+
+
+
+					<!-- ================= RIGHT SIDEBAR (Table of Contents) ================= -->
+					<aside class="hidden border-l border-slate-200 px-6 py-12 xl:block dark:border-white/10">
+						<div class="sticky top-28">
+							<div class="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+								On this page
+							</div>
+							
+						</div>
+					</aside>
+
+
+				</div>
+			</main>
+
+		</div>
+	</div>
+
+	<!-- BxSites JS Assets -->
+	<script src="/assets/vendor/highlight/highlight.min.js"></script>
+	<script src="/assets/highlight-boxlang.js"></script>
+	<script>
+		// Highlight all fenced code blocks after Highlight.js and
+		// the custom BoxLang grammar have been loaded.
+		hljs.highlightAll();
+	</script>
+	<script src="/assets/tabs.js"></script>
+	<script src="/assets/admonition-collapse.js"></script>
+	<script src="/assets/copy-code.js"></script>
+	<script src="/assets/code-lines.js"></script>
+	<script src="/assets/prompt-init.js"></script>
+
+	<!-- Client JavaScript -->
+	<script>
+		const themeToggle = document.getElementById("themeToggle");
+		const moonIcon = document.getElementById("moonIcon");
+		const sunIcon = document.getElementById("sunIcon");
+
+		function updateThemeIcons() {
+			const isDark = document.documentElement.classList.contains("dark");
+			moonIcon.classList.toggle("hidden", !isDark);
+			sunIcon.classList.toggle("hidden", isDark);
+		}
+
+		themeToggle.addEventListener("click", () => {
+			document.documentElement.classList.toggle("dark");
+			updateThemeIcons();
+		});
+
+		const mobileMenuButton = document.getElementById("mobileMenuButton");
+		const sidebar = document.getElementById("sidebar");
+
+		mobileMenuButton.addEventListener("click", () => {
+			sidebar.classList.toggle("hidden");
+		});
+	</script>
+</body>
+</html>

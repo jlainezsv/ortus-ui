@@ -1,0 +1,327 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Buttons - ORTUS UI</title>
+
+	<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+		<meta name="description" content="Front-End&#x20;Documentation" />
+	</cfif>
+
+	<!-- Tailwind CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/bxsites.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/style.ce91db55.css"
+	/>
+
+	<!-- Highlight.js -->
+	<link rel="stylesheet" href="/assets/vendor/highlight/github.min.css" />
+
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+			theme: {
+				extend: {
+					colors: {
+						ortus: {
+							light: "#A9DD2F",
+							med: "#2DBA95",
+							dark: "#232530",
+						},
+					},
+				},
+			},
+		};
+	</script>
+</head>
+
+<body class="min-h-screen bg-white text-slate-900 antialiased dark:bg-[#0F121A] dark:text-slate-100">
+
+	<div class="min-h-screen">
+
+		<!-- ================= TOP BAR ================= -->
+		<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-[#151923]/95">
+			<div class="mx-auto flex h-16 items-center px-5 lg:px-8">
+
+				
+
+				<!-- Logo / Brand -->
+				<a href="/" class="flex items-center gap-3">
+					<div class="flex h-8 w-8 items-center justify-center">
+						<img 
+              src="/assets/theme/images/ortus-icon-full.svg" 
+              alt="Ortus Logo"
+              class="h-full w-full object-contain"
+            />
+					</div>
+
+					<div class="hidden sm:block">
+						<div class="text-sm font-semibold tracking-tight">
+							ORTUS UI
+						</div>
+						<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+							<div class="text-[11px] text-slate-500 dark:text-slate-400">
+								Front-End Documentation
+							</div>
+						</cfif>
+					</div>
+				</a>
+
+				<!-- Header Right Actions -->
+				<div class="ml-auto flex items-center gap-3">
+					<cfif structKeyExists( variables.siteConfig, "repo" ) AND isStruct( variables.siteConfig.repo ) AND structKeyExists( variables.siteConfig.repo, "url" )>
+						<a 
+							href="" 
+							target="_blank" 
+							rel="noopener noreferrer" 
+							class="hidden rounded-lg px-3 py-2 text-sm text-slate-500 hover:bg-slate-100 hover:text-slate-900 sm:block dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+						>
+							GitHub
+						</a>
+					</cfif>
+
+					<!-- Dark Mode Toggle -->
+					<button id="themeToggle" type="button" class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" aria-label="Toggle theme">
+						<svg id="moonIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+						<svg id="sunIcon" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+					</button>
+				</div>
+
+        <!-- Mobile menu toggle -->
+				<button
+					id="mobileMenuButton"
+					type="button"
+					class="mr-3 rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 lg:hidden dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+					aria-label="Open navigation"
+				>
+					☰
+				</button>
+			</div>
+		</header>
+
+		<!-- ================= PAGE CONTENT ================= -->
+		<div class="mx-auto flex">
+
+			<!-- ================= LEFT SIDEBAR (Navegación del sitio) ================= -->
+			<aside id="sidebar" class="fixed inset-y-16 left-0 z-40 hidden w-72 overflow-y-auto border-r border-slate-200 bg-white px-5 py-7 lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] dark:border-white/10 dark:bg-[#121620]">
+				
+
+
+<nav class="space-y-4">
+    
+        <ul class="space-y-1"><li><a href="/boxlang/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">BOXLANG</a></li><li><div class="mb-2 mt-4 px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">components</div><ul class="space-y-1"><li><a href="/boxlang/components/buttons/index.html" class="block rounded-lg px-3 py-2 text-sm bg-emerald-400/10 font-medium text-emerald-300" aria-current="page">Buttons</a></li><li><a href="/boxlang/components/cards/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Cards</a></li><li><a href="/boxlang/components/footer/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Footer</a></li><li><a href="/boxlang/components/forms/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Forms</a></li><li><a href="/boxlang/components/header/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Header</a></li><li><a href="/boxlang/components/layout/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Layout</a></li><li><a href="/boxlang/components/sidebar/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Sidebar</a></li><li><a href="/boxlang/components/tables/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Tables</a></li></ul></li><li><a href="/boxlang/getting-started/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Getting Started</a></li></ul>
+    
+</nav>
+
+			</aside>
+
+			<!-- ================= MAIN CONTENT & RIGHT SIDEBAR ================= -->
+			<main class="min-w-0 flex-1">
+				<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_220px]">
+
+
+					
+
+
+
+    <article class="min-w-0 px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
+        
+            <nav aria-label="Breadcrumb" class="mb-4"><ol class="flex flex-wrap items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400"><li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition-colors">Hub</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li><a href="/boxlang/index.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Overview</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li aria-current="page" class="font-medium text-slate-900 dark:text-white">Buttons</li></ol></nav>
+        
+        <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Buttons</h1>
+            
+                <p class="mt-2 text-lg text-slate-600 dark:text-slate-300">An in-page navigation component for long-form pages.</p>
+            
+        </header>
+
+        <div class="prose max-w-none dark:prose-invert" id="page-content">
+            <svg xmlns="http://www.w3.org/2000/svg" class="adm-hidden">
+<symbol id="adm-note">
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<g fill="currentColor">
+<path d="m15.4 5h4.5v2.7h-4.5z" transform="matrix(-.7071 -.7071 .7071 -.7071 25.7188 23.288)"/>
+<path d="m13.9 7 3.1 3.1-9.5 9.6-3.5.3.3-3.5z"/>
+</g>
+</svg>
+</symbol>
+<symbol id="adm-warning">
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="m3.1 18.5 8.1-14c.4-.7 1.4-.7 1.8 0l8.1 14c.4.7-.1 1.6-.9 1.6h-16.1c-.9 0-1.4-.9-1-1.6zm10.6-4.3c0-.1 0-.2 0-.2v-4.6c0-.4 0-.6 0-.6-.1-.1-.3-.2-.7-.3s-.7-.1-1-.1c-.1 0-.2 0-.3 0-.3.1-.5.2-.5.4v4.2s-.1.1-.2.4-.1.4 0 .5c.3.2.7.4 1.2.6s.9.3 1.2.3h.2c.2 0 .3-.2.3-.5-.2 0-.2-.1-.2-.1zm-.8 1.4c-.5-.2-.9-.2-1.2-.2s-.4.1-.5.4v.9c0 .2 0 .3-.1.4-.1.2-.2.3-.1.4s.5.3 1.2.5c.6.2 1 .2 1.1.2.2 0 .4-.1.4-.3s.1-.4.1-.7c0-.1 0-.3.1-.7 0-.3 0-.5 0-.5-.2-.1-.5-.2-1-.4z" fill="currentColor"/>
+</svg>
+</symbol>
+<symbol id="adm-tip">
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="m12.3 10c2.8-.7 4.2-3.8 2.1-7.4 8.1 3.2 7.5 18.1-2.6 18.4-8.1.2-9.8-11.4-4.4-14.8.2 3.3 2.8 4.3 4.9 3.8zm-3.2 5.8c.2 1.6 2.5 1.9 3.6 1.5 2.8-1 2.5-4 2.1-5.1-.8 1.4-1.3 1.7-2.2 2s-3.7-.7-3.5 1.6z" fill="currentColor"/>
+</svg>
+</symbol>
+<symbol id="adm-danger">
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="m8.5 4h8.5l-4 8h3l-7.1 9.5 1.6-8.5h-1.5z" fill="currentColor"/>
+</svg>
+</symbol>
+<symbol id="adm-info">
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="m20.5 11.8c0 4.5-3.7 8.2-8.2 8.2s-8.2-3.7-8.2-8.2 3.7-8.2 8.2-8.2 8.2 3.7 8.2 8.2zm-6.7 4c-.1-.1-.2-.2-.2-.3v-4.5c0-.1.1-.2.2-.4s.2-.3.2-.3 0-.1-.1-.1c-.1-.1-.5-.2-1.2-.4-.7-.1-1.2-.2-1.5-.2-.5 0-.7 0-.7.1s.1.3.2.6v4.7c0 .3-.1.5-.2.6-.2.2-.2.3-.2.3.1.1.5.3 1.2.4.6.1 1.2.2 1.6.2h.3c.4-.1.5-.2.5-.5.1 0 .1-.1-.1-.2zm-.9-8.6c-.7-.1-1.2-.2-1.5-.2-.2 0-.5.2-.7.4s-.3.4-.3.6c0 .1 0 .1.1.2s.6.2 1.5.4c1 .3 1.5.4 1.6.3.1 0 .2-.2.3-.5s.2-.5.2-.6v-.1c-.1-.1-.5-.3-1.2-.5z" fill="currentColor"/>
+</svg>
+</symbol>
+</svg>
+<div class="adm-block adm-note">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-note" /></svg><span>Note</span>
+</div>
+<div class="adm-body">
+<p>This is a note.</p>
+</div>
+</div>
+<div class="adm-block adm-tip">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-tip" /></svg><span>Tip</span>
+</div>
+<div class="adm-body">
+<p>This is a tip.</p>
+</div>
+</div>
+<div class="adm-block adm-warning">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-warning" /></svg><span>Warning</span>
+</div>
+<div class="adm-body">
+<p>This is a warning.</p>
+</div>
+</div>
+<div class="adm-block adm-danger">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-danger" /></svg><span>Danger</span>
+</div>
+<div class="adm-body">
+<p>This is dangerous.</p>
+</div>
+</div>
+<div class="adm-block adm-info">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-info" /></svg><span>Info</span>
+</div>
+<div class="adm-body">
+<p>Additional information.</p>
+</div>
+</div>
+<div class="adm-block adm-note adm-collapsed">
+<div class="adm-heading">
+<svg class="adm-icon"><use xlink:href="#adm-note" /></svg><span>Show more</span>
+</div>
+<div class="adm-body">
+<p>Additional content goes here.</p>
+</div>
+</div>
+<pre data-bxsites-start-line="1" data-bxsites-title="Example"><code class="language-html">&lt;div class=&quot;example&quot;&gt;
+    ...
+&lt;/div&gt;
+
+
+**Tabs** y **content blocks** tienen sintaxis propia de BxSites, pero aquí quiero ser cuidadoso: **no quiero darte otra sintaxis que no esté confirmada para la versión que tienes instalada**.
+
+Y aquí está el punto importante:
+
+### Yo haría una prueba MUY pequeña
+
+Crea temporalmente `docs/test.md` con solamente:
+
+```markdown
+# BxSites Component Test
+
+## Admonition
+
+!!! note &quot;Note&quot;
+    This is a test note.
+
+## Warning
+
+!!! warning &quot;Warning&quot;
+    This is a test warning.
+
+## Code
+
+```html title=&quot;Example&quot;
+&lt;div class=&quot;example&quot;&gt;
+  Helloooo
+&lt;/div&gt;
+
+
+Luego:
+
+```bash
+boxlang module:bxSites build --projectRoot=.</code></pre>
+
+        </div>
+    </article>
+
+
+
+					<!-- ================= RIGHT SIDEBAR (Table of Contents) ================= -->
+					<aside class="hidden border-l border-slate-200 px-6 py-12 xl:block dark:border-white/10">
+						<div class="sticky top-28">
+							<div class="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+								On this page
+							</div>
+							
+						</div>
+					</aside>
+
+
+				</div>
+			</main>
+
+		</div>
+	</div>
+
+	<!-- BxSites JS Assets -->
+	<script src="/assets/vendor/highlight/highlight.min.js"></script>
+	<script src="/assets/highlight-boxlang.js"></script>
+	<script>
+		// Highlight all fenced code blocks after Highlight.js and
+		// the custom BoxLang grammar have been loaded.
+		hljs.highlightAll();
+	</script>
+	<script src="/assets/tabs.js"></script>
+	<script src="/assets/admonition-collapse.js"></script>
+	<script src="/assets/copy-code.js"></script>
+	<script src="/assets/code-lines.js"></script>
+	<script src="/assets/prompt-init.js"></script>
+
+	<!-- Client JavaScript -->
+	<script>
+		const themeToggle = document.getElementById("themeToggle");
+		const moonIcon = document.getElementById("moonIcon");
+		const sunIcon = document.getElementById("sunIcon");
+
+		function updateThemeIcons() {
+			const isDark = document.documentElement.classList.contains("dark");
+			moonIcon.classList.toggle("hidden", !isDark);
+			sunIcon.classList.toggle("hidden", isDark);
+		}
+
+		themeToggle.addEventListener("click", () => {
+			document.documentElement.classList.toggle("dark");
+			updateThemeIcons();
+		});
+
+		const mobileMenuButton = document.getElementById("mobileMenuButton");
+		const sidebar = document.getElementById("sidebar");
+
+		mobileMenuButton.addEventListener("click", () => {
+			sidebar.classList.toggle("hidden");
+		});
+	</script>
+</body>
+</html>

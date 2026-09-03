@@ -1,0 +1,247 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>ORTUS UI - ORTUS UI</title>
+
+	<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+		<meta name="description" content="Front-End&#x20;Documentation" />
+	</cfif>
+
+	<!-- Tailwind CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/bxsites.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/style.ce91db55.css"
+	/>
+
+	<!-- Highlight.js -->
+	<link rel="stylesheet" href="/assets/vendor/highlight/github.min.css" />
+
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+			theme: {
+				extend: {
+					colors: {
+						ortus: {
+							light: "#A9DD2F",
+							med: "#2DBA95",
+							dark: "#232530",
+						},
+					},
+				},
+			},
+		};
+	</script>
+</head>
+
+<body class="min-h-screen bg-white text-slate-900 antialiased dark:bg-[#0F121A] dark:text-slate-100">
+
+	<div class="min-h-screen">
+
+		<!-- ================= TOP BAR ================= -->
+		<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-[#151923]/95">
+			<div class="mx-auto flex h-16 items-center px-5 lg:px-8">
+
+				
+
+				<!-- Logo / Brand -->
+				<a href="/" class="flex items-center gap-3">
+					<div class="flex h-8 w-8 items-center justify-center">
+						<img 
+              src="/assets/theme/images/ortus-icon-full.svg" 
+              alt="Ortus Logo"
+              class="h-full w-full object-contain"
+            />
+					</div>
+
+					<div class="hidden sm:block">
+						<div class="text-sm font-semibold tracking-tight">
+							ORTUS UI
+						</div>
+						<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+							<div class="text-[11px] text-slate-500 dark:text-slate-400">
+								Front-End Documentation
+							</div>
+						</cfif>
+					</div>
+				</a>
+
+				<!-- Header Right Actions -->
+				<div class="ml-auto flex items-center gap-3">
+					<cfif structKeyExists( variables.siteConfig, "repo" ) AND isStruct( variables.siteConfig.repo ) AND structKeyExists( variables.siteConfig.repo, "url" )>
+						<a 
+							href="" 
+							target="_blank" 
+							rel="noopener noreferrer" 
+							class="hidden rounded-lg px-3 py-2 text-sm text-slate-500 hover:bg-slate-100 hover:text-slate-900 sm:block dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+						>
+							GitHub
+						</a>
+					</cfif>
+
+					<!-- Dark Mode Toggle -->
+					<button id="themeToggle" type="button" class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" aria-label="Toggle theme">
+						<svg id="moonIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+						<svg id="sunIcon" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+					</button>
+				</div>
+
+        <!-- Mobile menu toggle -->
+				<button
+					id="mobileMenuButton"
+					type="button"
+					class="mr-3 rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 lg:hidden dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+					aria-label="Open navigation"
+				>
+					☰
+				</button>
+			</div>
+		</header>
+
+		<!-- ================= PAGE CONTENT ================= -->
+		<div class="mx-auto flex">
+
+			<!-- ================= LEFT SIDEBAR (Navegación del sitio) ================= -->
+			<aside id="sidebar" class="fixed inset-y-16 left-0 z-40 hidden w-72 overflow-y-auto border-r border-slate-200 bg-white px-5 py-7 lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] dark:border-white/10 dark:bg-[#121620]">
+				
+
+
+<nav class="space-y-4">
+    
+        <ul class="space-y-1"><li><a href="/boxlang/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">BOXLANG</a></li></ul>
+    
+</nav>
+
+			</aside>
+
+			<!-- ================= MAIN CONTENT & RIGHT SIDEBAR ================= -->
+			<main class="min-w-0 flex-1">
+				<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_220px]">
+
+
+					
+
+
+
+    <div class="mx-auto max-w-5xl px-6 py-12">
+        <div class="mb-10 text-center">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">Ortus UI Documentation Hub</h1>
+            <p class="mt-3 text-base text-slate-500 dark:text-slate-400">Select a product or framework below to explore its official documentation.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            
+            <!-- Tile de BoxLang con la URL corregida -->
+            <a href="/boxlang/index.html" class="group relative flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-ortus-med hover:shadow-md dark:border-white/10 dark:bg-ortus-dark">
+                <div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-ortus-med/10 text-ortus-med dark:text-ortus-light">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                    </div>
+                    <h2 class="mt-4 text-lg font-bold text-slate-900 dark:text-white group-hover:text-ortus-med">BoxLang</h2>
+                    <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Official documentation for BoxLang syntax, components, and core guides.</p>
+                </div>
+                <div class="mt-6 flex items-center text-xs font-semibold text-ortus-med dark:text-ortus-light">
+                    <span>Explore Documentation</span>
+                    <svg class="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </div>
+            </a>
+
+            <!-- Skeleton 1 -->
+            <div class="relative flex flex-col justify-between rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 opacity-60 dark:border-white/10 dark:bg-white/[0.02]">
+                <div>
+                    <div class="h-12 w-12 animate-pulse rounded-lg bg-slate-200 dark:bg-slate-800"></div>
+                    <div class="mt-4 h-5 w-3/4 animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                    <div class="mt-3 space-y-2">
+                        <div class="h-3 w-full animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                        <div class="h-3 w-2/3 animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                    </div>
+                </div>
+                <div class="mt-6 text-xs font-medium text-slate-400">Coming Soon...</div>
+            </div>
+
+            <!-- Skeleton 2 -->
+            <div class="relative flex flex-col justify-between rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 opacity-60 dark:border-white/10 dark:bg-white/[0.02]">
+                <div>
+                    <div class="h-12 w-12 animate-pulse rounded-lg bg-slate-200 dark:bg-slate-800"></div>
+                    <div class="mt-4 h-5 w-3/4 animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                    <div class="mt-3 space-y-2">
+                        <div class="h-3 w-full animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                        <div class="h-3 w-1/2 animate-pulse rounded bg-slate-200 dark:bg-slate-800"></div>
+                    </div>
+                </div>
+                <div class="mt-6 text-xs font-medium text-slate-400">Coming Soon...</div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+					<!-- ================= RIGHT SIDEBAR (Table of Contents) ================= -->
+					<aside class="hidden border-l border-slate-200 px-6 py-12 xl:block dark:border-white/10">
+						<div class="sticky top-28">
+							<div class="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+								On this page
+							</div>
+							<ul class="space-y-2 border-l border-slate-200 pl-4 text-sm dark:border-white/10" role="list"><li><a href="#secciones" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Secciones</a></li></ul>
+						</div>
+					</aside>
+
+
+				</div>
+			</main>
+
+		</div>
+	</div>
+
+	<!-- BxSites JS Assets -->
+	<script src="/assets/vendor/highlight/highlight.min.js"></script>
+	<script src="/assets/highlight-boxlang.js"></script>
+	<script>
+		// Highlight all fenced code blocks after Highlight.js and
+		// the custom BoxLang grammar have been loaded.
+		hljs.highlightAll();
+	</script>
+	<script src="/assets/tabs.js"></script>
+	<script src="/assets/admonition-collapse.js"></script>
+	<script src="/assets/copy-code.js"></script>
+	<script src="/assets/code-lines.js"></script>
+	<script src="/assets/prompt-init.js"></script>
+
+	<!-- Client JavaScript -->
+	<script>
+		const themeToggle = document.getElementById("themeToggle");
+		const moonIcon = document.getElementById("moonIcon");
+		const sunIcon = document.getElementById("sunIcon");
+
+		function updateThemeIcons() {
+			const isDark = document.documentElement.classList.contains("dark");
+			moonIcon.classList.toggle("hidden", !isDark);
+			sunIcon.classList.toggle("hidden", isDark);
+		}
+
+		themeToggle.addEventListener("click", () => {
+			document.documentElement.classList.toggle("dark");
+			updateThemeIcons();
+		});
+
+		const mobileMenuButton = document.getElementById("mobileMenuButton");
+		const sidebar = document.getElementById("sidebar");
+
+		mobileMenuButton.addEventListener("click", () => {
+			sidebar.classList.toggle("hidden");
+		});
+	</script>
+</body>
+</html>
