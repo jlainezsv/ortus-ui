@@ -1,5 +1,5 @@
 ---
-title: "Sidebar"
+title: "Playbook Sidebar"
 summary: "An in-page navigation component for long-form pages."
 ---
 

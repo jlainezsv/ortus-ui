@@ -1,5 +1,5 @@
 ---
-title: "Sidebar V2"
+title: "Playbook Sidebar"
 summary: "In-page navigation for long-form pages with automatic scroll tracking."
 ---
 
