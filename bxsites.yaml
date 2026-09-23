@@ -7,9 +7,4 @@ theme:
   options: {}
 search: true
 nav: []
-markdown: {}
-deployments:
-  github:
-    provider: github-pages
-    repository: jlainezsv/ortus-ui
-    branch: gh-pages
+
