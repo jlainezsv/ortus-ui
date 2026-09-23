@@ -1,0 +1,40 @@
+name: Deploy BxSites to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup BoxLang
+        uses: ortus-solutions/setup-boxlang@main
+
+      - name: Install BxSites
+        run: box install bx-sites
+
+      - name: Build BxSites
+        run: boxlang module:bxsites build --projectRoot=.
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin gh-pages || true
+          git checkout --orphan gh-pages || git checkout gh-pages
+          git rm -rf . || true
+          cp -R site/. .
+          git add .
+          git commit -m "Deploy BxSites"
+          git push origin gh-pages --force
