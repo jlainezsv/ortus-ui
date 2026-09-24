@@ -44,8 +44,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: bxSites deploy --target=github-pages --branch=gh-pages --remote=origin
-
-      - name: Check BxSites version
-        run: |
-            bxSites --version
-            boxlang module:list
+        
