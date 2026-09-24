@@ -30,5 +30,11 @@ jobs:
       - name: Build BxSites
         run: bxSites build
 
+      - name: Verify base path in output
+        run: |
+          grep -q 'href="/ortus-ui/boxlang/index.html"' site/index.html \
+            && echo "OK: base path present" \
+            || { echo "FAIL: base path missing from site/index.html"; exit 1; }
+
       - name: Deploy to GitHub Pages
         run: bxSites deploy --target=github-pages --branch=gh-pages --remote=origin
