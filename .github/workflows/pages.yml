@@ -24,6 +24,10 @@ jobs:
       - name: Install BxSites
         run: install-bx-module bx-sites
 
+      - name: Configure GitHub Pages base URL
+        run: |
+          sed -i 's|^baseURL: "/"|baseURL: "/ortus-ui/"|' bxsites.yaml
+
       - name: Build BxSites
         run: bxSites build
 
