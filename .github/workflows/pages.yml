@@ -16,19 +16,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
-      - name: Setup Java 21
-        uses: actions/setup-java@v4
+
+      - name: Setup BoxLang
+        uses: ortus-boxlang/setup-boxlang@main
         with:
-            distribution: temurin
-            java-version: '21'
-
-      - name: Install BoxLang
-        run: |
-          curl -fsSL https://install.boxlang.io/ | bash
-
-      - name: Install BxSites
-        run: install-bx-module bx-sites
+          version: latest
+          modules: bx-sites
 
       - name: Configure GitHub Pages base URL
         run: |
