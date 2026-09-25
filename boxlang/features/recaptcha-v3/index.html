@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>reCAPTCHA v3 - ORTUS UI</title>
+
+	<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+		<meta name="description" content="Front-End&#x20;Documentation" />
+	</cfif>
+
+	<!-- Tailwind CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link
+		rel="stylesheet"
+		href="/ortus-ui/assets/theme/bxsites.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="/ortus-ui/assets/theme/style.ce91db55.css"
+	/>
+
+	<!-- Highlight.js -->
+	<link rel="stylesheet" href="/ortus-ui/assets/vendor/highlight/github.min.css" />
+
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+			theme: {
+				extend: {
+					colors: {
+						ortus: {
+							light: "#A9DD2F",
+							med: "#2DBA95",
+							dark: "#232530",
+						},
+					},
+				},
+			},
+		};
+	</script>
+</head>
+
+<body class="min-h-screen bg-white text-slate-900 antialiased dark:bg-[#0F121A] dark:text-slate-100">
+
+	<div class="min-h-screen">
+
+		<!-- ================= TOP BAR ================= -->
+		<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-[#151923]/95">
+			<div class="mx-auto flex h-16 items-center px-5 lg:px-8">
+
+				
+
+				<!-- Logo / Brand -->
+				<a href="/ortus-ui/" class="flex items-center gap-3">
+					<div class="flex h-8 w-8 items-center justify-center">
+						<img 
+              src="/ortus-ui/assets/theme/images/ortus-icon-full.svg" 
+              alt="Ortus Logo"
+              class="h-full w-full object-contain"
+            />
+					</div>
+
+					<div class="hidden sm:block">
+						<div class="text-sm font-semibold tracking-tight">
+							ORTUS UI
+						</div>
+						<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+							<div class="text-[11px] text-slate-500 dark:text-slate-400">
+								Front-End Documentation
+							</div>
+						</cfif>
+					</div>
+				</a>
+
+				<!-- Header Right Actions -->
+				<div class="ml-auto flex items-center gap-3">
+					<cfif structKeyExists( variables.siteConfig, "repo" ) AND isStruct( variables.siteConfig.repo ) AND structKeyExists( variables.siteConfig.repo, "url" )>
+						<a 
+							href="" 
+							target="_blank" 
+							rel="noopener noreferrer" 
+							class="hidden rounded-lg px-3 py-2 text-sm text-slate-500 hover:bg-slate-100 hover:text-slate-900 sm:block dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+						>
+							GitHub
+						</a>
+					</cfif>
+
+					<!-- Dark Mode Toggle -->
+					<button id="themeToggle" type="button" class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" aria-label="Toggle theme">
+						<svg id="moonIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+						<svg id="sunIcon" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+					</button>
+				</div>
+
+        <!-- Mobile menu toggle -->
+				<button
+					id="mobileMenuButton"
+					type="button"
+					class="mr-3 rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 lg:hidden dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+					aria-label="Open navigation"
+				>
+					☰
+				</button>
+			</div>
+		</header>
+
+		<!-- ================= PAGE CONTENT ================= -->
+		<div class="mx-auto flex">
+
+			<!-- ================= LEFT SIDEBAR (Navegación del sitio) ================= -->
+			<aside id="sidebar" class="fixed inset-y-16 left-0 z-40 hidden w-72 overflow-y-auto border-r border-slate-200 bg-white px-5 py-7 lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] dark:border-white/10 dark:bg-[#121620]">
+				
+
+
+<nav class="space-y-4">
+    
+        <ul class="space-y-1"><li><a href="/ortus-ui/boxlang/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">BOXLANG</a></li><li><div class="mb-2 mt-4 px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">components</div><ul class="space-y-1"><li><a href="/ortus-ui/boxlang/components/sidebar-v2/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Playbook Sidebar</a></li></ul></li><li><div class="mb-2 mt-4 px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">features</div><ul class="space-y-1"><li><a href="/ortus-ui/boxlang/features/recaptcha-v3/index.html" class="block rounded-lg px-3 py-2 text-sm bg-emerald-400/10 font-medium text-emerald-300" aria-current="page">reCAPTCHA v3</a></li></ul></li><li><a href="/ortus-ui/boxlang/getting-started/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Getting Started</a></li></ul>
+    
+</nav>
+
+			</aside>
+
+			<!-- ================= MAIN CONTENT & RIGHT SIDEBAR ================= -->
+			<main class="min-w-0 flex-1">
+				<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_220px]">
+
+
+					
+
+
+
+    <article class="min-w-0 px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
+        
+            <nav aria-label="Breadcrumb" class="mb-4"><ol class="flex flex-wrap items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400"><li><a href="/ortus-ui/" class="hover:text-slate-900 dark:hover:text-white transition-colors">Hub</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li><a href="/ortus-ui/boxlang/index.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Overview</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li aria-current="page" class="font-medium text-slate-900 dark:text-white">reCAPTCHA v3</li></ol></nav>
+        
+        <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">reCAPTCHA v3</h1>
+            
+                <p class="mt-2 text-lg text-slate-600 dark:text-slate-300">Invisible score-based spam protection for BoxLang contact forms.</p>
+            
+        </header>
+
+        <div class="prose max-w-none dark:prose-invert" id="page-content">
+            <h2 id="overview"><a href="#overview" id="overview" name="overview" class="anchor"></a>Overview</h2>
+<p>The BoxLang contact form uses Google reCAPTCHA v3 to protect against
+spam and automated submissions without displaying a visible CAPTCHA
+challenge.</p>
+<p>reCAPTCHA v3 runs in the background and returns a risk score from <code>0.0</code>
+to <code>1.0</code>. The application verifies the token, expected action, and score
+on the server before processing the form submission.</p>
+<p><strong>Current scope:</strong> BoxLang contact form only (<code>/bxcontactus</code>).</p>
+<p>The active form is stored as ContentBox content rather than a checked-in
+<code>.cfm</code> template:</p>
+<pre><code class="language-text">ContentStore(&quot;contact-form&quot;)
+→ RecaptchaV3Element
+→ POST /bxcontactus
+→ Site.doContactbx()
+→ RecaptchaV3Service.verify()
+→ Google siteverify
+→ mail delivery
+</code></pre>
+<hr />
+<h2 id="how-it-works"><a href="#how-it-works" id="how-it-works" name="how-it-works" class="anchor"></a>How It Works</h2>
+<p>The integration has two main parts: frontend token generation and
+server-side verification.</p>
+<h3 id="1-contentbox-renders-the-contact-form"><a href="#1-contentbox-renders-the-contact-form" id="1-contentbox-renders-the-contact-form" name="1-contentbox-renders-the-contact-form" class="anchor"></a>1. ContentBox renders the contact form</h3>
+<p>The active BoxLang page renders the ContentBox entry:</p>
+<pre><code class="language-text">{{{ContentStore slug=&quot;contact-form&quot; }}}
+</code></pre>
+<p>The <code>contact-form</code> Content Store entry contains the form markup and
+invokes:</p>
+<pre><code class="language-text">{{{RecaptchaV3Element}}}
+</code></pre>
+<p>ContentBox resolves the widget through the active BoxLang theme.</p>
+<p>The active widget is:</p>
+<pre><code class="language-text">modules_app/contentbox-custom/_themes/boxlang/widgets/RecaptchaV3Element.cfc
+</code></pre>
+<h3 id="2-the-widget-prepares-recaptcha"><a href="#2-the-widget-prepares-recaptcha" id="2-the-widget-prepares-recaptcha" name="2-the-widget-prepares-recaptcha" class="anchor"></a>2. The widget prepares reCAPTCHA</h3>
+<p><code>RecaptchaV3Element</code> reads the public site key:</p>
+<pre><code class="language-text">cb_recaptcha_site_key
+</code></pre>
+<p>If the site key is empty, the widget renders nothing.</p>
+<p>When configured, it renders Google's reCAPTCHA v3 API and a hidden token
+field:</p>
+<pre><code class="language-html">&lt;input
+    type=&quot;hidden&quot;
+    name=&quot;g-recaptcha-response&quot;
+    id=&quot;g-recaptcha-response&quot;
+    value=&quot;&quot;
+&gt;
+</code></pre>
+<p>The secret key is never included in frontend output.</p>
+<h3 id="3-a-token-is-generated-when-the-user-submits-the-form"><a href="#3-a-token-is-generated-when-the-user-submits-the-form" id="3-a-token-is-generated-when-the-user-submits-the-form" name="3-a-token-is-generated-when-the-user-submits-the-form" class="anchor"></a>3. A token is generated when the user submits the form</h3>
+<p>The widget intercepts the form's submit event.</p>
+<p>It:</p>
+<ol>
+<li>Prevents the default submission.</li>
+<li>Prevents duplicate submissions.</li>
+<li>Disables the submit button.</li>
+<li>Waits for <code>grecaptcha.ready()</code>.</li>
+<li>Calls:</li>
+</ol>
+<pre><code class="language-javascript">window.grecaptcha.execute(siteKey, {
+    action: &quot;contact&quot;
+})
+</code></pre>
+<ol start="6">
+<li>Receives a reCAPTCHA token.</li>
+<li>Places the token in <code>g-recaptcha-response</code>.</li>
+</ol>
+<p>The token is generated fresh for each submission.</p>
+<h3 id="4-the-form-sends-the-token-to-the-backend"><a href="#4-the-form-sends-the-token-to-the-backend" id="4-the-form-sends-the-token-to-the-backend" name="4-the-form-sends-the-token-to-the-backend" class="anchor"></a>4. The form sends the token to the backend</h3>
+<p>The widget serializes the form with <code>FormData</code> and sends:</p>
+<pre><code class="language-http">POST /bxcontactus
+X-Requested-With: fetch
+</code></pre>
+<p>The token is submitted as:</p>
+<pre><code class="language-text">g-recaptcha-response
+</code></pre>
+<h3 id="5-the-backend-verifies-the-token"><a href="#5-the-backend-verifies-the-token" id="5-the-backend-verifies-the-token" name="5-the-backend-verifies-the-token" class="anchor"></a>5. The backend verifies the token</h3>
+<p>The route:</p>
+<pre><code class="language-text">POST /bxcontactus
+</code></pre>
+<p>is handled by:</p>
+<pre><code class="language-text">Site.doContactbx()
+</code></pre>
+<p>The handler reads the submitted token and resolves the minimum accepted
+score.</p>
+<p>It then calls:</p>
+<pre><code class="language-text">recaptchaV3Service.verify(
+    token,
+    &quot;contact&quot;,
+    minScore
+)
+</code></pre>
+<h3 id="6-recaptchav3service-contacts-google"><a href="#6-recaptchav3service-contacts-google" id="6-recaptchav3service-contacts-google" name="6-recaptchav3service-contacts-google" class="anchor"></a>6. <code>RecaptchaV3Service</code> contacts Google</h3>
+<p>The service sends the token and server-side secret to:</p>
+<pre><code class="language-text">https://www.google.com/recaptcha/api/siteverify
+</code></pre>
+<p>The request uses:</p>
+<pre><code class="language-text">application/x-www-form-urlencoded
+</code></pre>
+<p>and includes:</p>
+<ul>
+<li><code>secret</code></li>
+<li><code>response</code></li>
+<li><code>remoteip</code>, when available</li>
+</ul>
+<h3 id="7-the-response-is-validated"><a href="#7-the-response-is-validated" id="7-the-response-is-validated" name="7-the-response-is-validated" class="anchor"></a>7. The response is validated</h3>
+<p>The service validates:</p>
+<ul>
+<li>Google verification succeeded.</li>
+<li>The returned action matches <code>contact</code>.</li>
+<li>The returned score is numeric.</li>
+<li>The score is greater than or equal to <code>minScore</code>.</li>
+</ul>
+<p>The service reads and returns additional Google response data such as:</p>
+<ul>
+<li><code>hostname</code></li>
+<li><code>challenge_ts</code></li>
+<li><code>error-codes</code></li>
+</ul>
+<p>The current implementation does <strong>not</strong> independently validate the
+returned <code>hostname</code> or <code>challenge_ts</code>.</p>
+<h3 id="8-the-form-is-processed-only-after-verification"><a href="#8-the-form-is-processed-only-after-verification" id="8-the-form-is-processed-only-after-verification" name="8-the-form-is-processed-only-after-verification" class="anchor"></a>8. The form is processed only after verification</h3>
+<p>If verification succeeds, the contact handler continues with email
+processing.</p>
+<p>If verification fails:</p>
+<ul>
+<li>The request is rejected.</li>
+<li>No email is sent.</li>
+<li>The user receives a generic error message.</li>
+</ul>
+<p>For the frontend <code>fetch</code> flow, the user-facing failure response is:</p>
+<pre><code class="language-text">We couldn't send your message. Please try again.
+</code></pre>
+<p>The detailed service error is not exposed directly to the user.</p>
+<hr />
+<h2 id="configuration"><a href="#configuration" id="configuration" name="configuration" class="anchor"></a>Configuration</h2>
+<p>Administrators configure reCAPTCHA through <strong>ContentBox → Settings</strong>.</p>
+<hr />
+<p>Setting                     Purpose           Scope             Default /
+Fallback</p>
+<hr />
+<p><code>cb_recaptcha_site_key</code>     Public Google     Site-specific     Empty
+reCAPTCHA site<br />
+key</p>
+<p><code>cb_recaptcha_secret_key</code>   Server-side       Site-specific     Verification
+Google reCAPTCHA                    fails if
+secret key                          unavailable</p>
+<h2 id="cb-recaptcha-min-score----minimum-accepted--global-with-------05risk-score--------site-specific-----override"><a href="#cb-recaptcha-min-score----minimum-accepted--global-with-------05risk-score--------site-specific-----override" id="cb-recaptcha-min-score----minimum-accepted--global-with-------05risk-score--------site-specific-----override" name="cb-recaptcha-min-score----minimum-accepted--global-with-------05risk-score--------site-specific-----override" class="anchor"></a><code>cb_recaptcha_min_score</code>    Minimum accepted  Global with       <code>0.5</code>
+risk score        site-specific<br />
+override</h2>
+<h3 id="site-key"><a href="#site-key" id="site-key" name="site-key" class="anchor"></a>Site Key</h3>
+<p><code>cb_recaptcha_site_key</code> is the public key used by the browser.</p>
+<p>It is:</p>
+<ul>
+<li>Retrieved from the current ContentBox site.</li>
+<li>Used in the Google script URL.</li>
+<li>Used by <code>grecaptcha.execute()</code>.</li>
+</ul>
+<p>The site key is public by design.</p>
+<p>If it is empty or contains only whitespace, <code>RecaptchaV3Element</code> returns
+an empty string and does not render the reCAPTCHA integration.</p>
+<h3 id="secret-key"><a href="#secret-key" id="secret-key" name="secret-key" class="anchor"></a>Secret Key</h3>
+<p><code>cb_recaptcha_secret_key</code> is used only by the server.</p>
+<p>It is retrieved from the current ContentBox site and sent to Google's
+verification endpoint as the <code>secret</code> parameter.</p>
+<p><strong>Never expose the secret key in client-side code, HTML, browser output,
+or logs.</strong></p>
+<p>If the secret cannot be read or is empty, verification fails with:</p>
+<pre><code class="language-text">reCAPTCHA configuration is unavailable.
+</code></pre>
+<h3 id="minimum-score"><a href="#minimum-score" id="minimum-score" name="minimum-score" class="anchor"></a>Minimum Score</h3>
+<p><code>cb_recaptcha_min_score</code> controls how strict score validation is.</p>
+<pre><code class="language-text">Score &gt;= minScore → Pass
+Score &lt; minScore  → Fail
+</code></pre>
+<p>The accepted range is <code>0.0</code> through <code>1.0</code>.</p>
+<p>The current resolution order is:</p>
+<pre><code class="language-text">1. Site-specific cb_recaptcha_min_score
+2. Global cb_recaptcha_min_score
+3. Code fallback: 0.5
+</code></pre>
+<p>A configured value is used only when it is numeric and between <code>0</code> and
+<code>1</code>, inclusive.</p>
+<p>If the value is missing, blank, invalid, out of range, or settings
+resolution fails, the application uses <code>0.5</code>.</p>
+<p>The current ContentBox data stores <code>cb_recaptcha_min_score</code> globally
+with a value of <code>0.5</code>.</p>
+<p>A higher threshold requires a higher reCAPTCHA score. A lower threshold
+is more permissive.</p>
+<p>Adjust the threshold based on the site's observed score distribution,
+spam, and false-positive behavior.</p>
+<hr />
+<h2 id="google-configuration"><a href="#google-configuration" id="google-configuration" name="google-configuration" class="anchor"></a>Google Configuration</h2>
+<p>Create a <strong>reCAPTCHA v3</strong> key pair in the Google reCAPTCHA Admin
+Console.</p>
+<p>You need:</p>
+<ul>
+<li>Site key</li>
+<li>Secret key</li>
+</ul>
+<p>Configure all domains that will use the integration, including
+applicable staging domains.</p>
+<p>The site key is public. The secret key must remain server-side.</p>
+<p>For materially different sites or environments, use credentials that are
+valid for the target hostname rather than assuming that credentials from
+another site can be reused.</p>
+<hr />
+<h2 id="action-validation"><a href="#action-validation" id="action-validation" name="action-validation" class="anchor"></a>Action Validation</h2>
+<p>The current contact form uses:</p>
+<pre><code class="language-text">contact
+</code></pre>
+<p>The frontend generates the token with:</p>
+<pre><code class="language-javascript">grecaptcha.execute(siteKey, {
+    action: &quot;contact&quot;
+})
+</code></pre>
+<p>The backend passes the same action to the verification service:</p>
+<pre><code class="language-text">action = &quot;contact&quot;
+</code></pre>
+<p>The service compares the returned Google action using exact equality.</p>
+<p>The action must therefore match between the frontend and backend.</p>
+<p>An action mismatch causes verification to fail.</p>
+<p>This is important when reusing the integration for other forms: the
+frontend and backend must agree on the action being verified.</p>
+<hr />
+<h2 id="server-side-verification"><a href="#server-side-verification" id="server-side-verification" name="server-side-verification" class="anchor"></a>Server-Side Verification</h2>
+<p>The verification service is:</p>
+<pre><code class="language-text">modules_app/contentbox-custom/models/recaptcha/RecaptchaV3Service.cfc
+</code></pre>
+<p>Its main method is:</p>
+<pre><code class="language-text">verify(
+    token,
+    action,
+    minScore
+)
+</code></pre>
+<p>The service:</p>
+<ol>
+<li>Resolves the current site's secret key.</li>
+<li>Builds a request to Google's <code>siteverify</code> endpoint.</li>
+<li>Sends the secret and token.</li>
+<li>Optionally sends the client IP.</li>
+<li>Parses Google's response.</li>
+<li>Validates the response.</li>
+<li>Returns a structured result.</li>
+</ol>
+<h3 id="google-verification-request"><a href="#google-verification-request" id="google-verification-request" name="google-verification-request" class="anchor"></a>Google Verification Request</h3>
+<p>The endpoint is:</p>
+<pre><code class="language-text">https://www.google.com/recaptcha/api/siteverify
+</code></pre>
+<p>The request uses:</p>
+<pre><code class="language-http">Content-Type: application/x-www-form-urlencoded
+</code></pre>
+<p>with:</p>
+<pre><code class="language-text">secret
+response
+remoteip
+</code></pre>
+<p>The request timeout is <code>10</code> seconds.</p>
+<p>When a client IP is available, the service resolves it in this order:</p>
+<pre><code class="language-text">x-cluster-client-ip
+→ X-Forwarded-For
+→ cgi.remote_addr
+→ 127.0.0.1
+</code></pre>
+<p>Only use forwarded client-IP headers when they are controlled by a
+trusted proxy boundary.</p>
+<h3 id="validation-rules"><a href="#validation-rules" id="validation-rules" name="validation-rules" class="anchor"></a>Validation Rules</h3>
+<p>The service requires:</p>
+<pre><code class="language-text">Google success === true
+AND
+returned action === expected action
+AND
+score is numeric
+AND
+score &gt;= minScore
+</code></pre>
+<p>Common service-level failures include:</p>
+<pre><code class="language-text">The reCAPTCHA action was invalid.
+The reCAPTCHA score was too low.
+reCAPTCHA verification failed.
+reCAPTCHA configuration is unavailable.
+</code></pre>
+<p>The handler converts these detailed errors into a generic user-facing
+failure response.</p>
+<hr />
+<h2 id="frontend-integration"><a href="#frontend-integration" id="frontend-integration" name="frontend-integration" class="anchor"></a>Frontend Integration</h2>
+<p>The client-side integration is implemented by:</p>
+<pre><code class="language-text">modules_app/contentbox-custom/_themes/boxlang/widgets/RecaptchaV3Element.cfc
+</code></pre>
+<p>The widget:</p>
+<ol>
+<li>Reads the current site's public site key.</li>
+<li>Loads Google's reCAPTCHA API.</li>
+<li>Creates the hidden <code>g-recaptcha-response</code> field.</li>
+<li>Finds the active contact form.</li>
+<li>Intercepts submission.</li>
+<li>Generates a fresh token.</li>
+<li>Adds the token to the form.</li>
+<li>Sends the form using <code>fetch</code>.</li>
+<li>Displays the server response.</li>
+<li>Restores the submit button after completion.</li>
+</ol>
+<p>The current widget expects:</p>
+<pre><code class="language-text">form id=&quot;contactForm&quot;
+token field id=&quot;g-recaptcha-response&quot;
+feedback element id=&quot;contactFormFeedback&quot;
+</code></pre>
+<p>It also assumes a submit button whose text can be changed while the
+request is running.</p>
+<h3 id="frontend-failure-handling"><a href="#frontend-failure-handling" id="frontend-failure-handling" name="frontend-failure-handling" class="anchor"></a>Frontend Failure Handling</h3>
+<p>The widget handles:</p>
+<ul>
+<li>Google API unavailable.</li>
+<li><code>grecaptcha.ready()</code> unavailable.</li>
+<li><code>grecaptcha.execute()</code> failure.</li>
+<li>Token promise rejection.</li>
+<li>Network failure.</li>
+<li>Invalid JSON response.</li>
+<li>Server response with <code>success: false</code>.</li>
+</ul>
+<p>In these cases:</p>
+<ul>
+<li>The form is not falsely reported as successful.</li>
+<li>The feedback element shows an error.</li>
+<li>The submit button is restored.</li>
+<li>The form is not reset.</li>
+</ul>
+<p>The widget does not generate a token during initial page rendering.
+Token generation happens when the user submits the form.</p>
+<h3 id="environment-behavior"><a href="#environment-behavior" id="environment-behavior" name="environment-behavior" class="anchor"></a>Environment Behavior</h3>
+<p>The reCAPTCHA widget does not have a production-only guard.</p>
+<p>It runs wherever the Content Store content is rendered and the widget
+can be resolved.</p>
+<p>The application has a separate environment check that changes the
+contact email subject outside production, but that check does not
+disable reCAPTCHA.</p>
+<hr />
+<h2 id="implementing-on-another-site"><a href="#implementing-on-another-site" id="implementing-on-another-site" name="implementing-on-another-site" class="anchor"></a>Implementing on Another Site</h2>
+<p>The current implementation combines generic Google reCAPTCHA v3 concepts
+with BoxLang and ContentBox-specific integration.</p>
+<p>The following describes what must be recreated versus what must be
+adapted.</p>
+<h3 id="1-google-setup"><a href="#1-google-setup" id="1-google-setup" name="1-google-setup" class="anchor"></a>1. Google Setup</h3>
+<p>Create a reCAPTCHA v3 configuration for the target site.</p>
+<p>You need:</p>
+<ul>
+<li>Public site key.</li>
+<li>Server-side secret key.</li>
+<li>Valid hostname/domain configuration.</li>
+</ul>
+<p>Keep the site key available to the frontend and keep the secret key
+exclusively on the server.</p>
+<h3 id="2-frontend"><a href="#2-frontend" id="2-frontend" name="2-frontend" class="anchor"></a>2. Frontend</h3>
+<p>The frontend must:</p>
+<ol>
+<li>Load Google's reCAPTCHA JavaScript API.</li>
+<li>Obtain the public site key from configuration.</li>
+<li>Generate a token when the protected form/action occurs.</li>
+<li>Use a named action.</li>
+<li>Place the token in the submitted form data.</li>
+<li>Send the token to the backend.</li>
+<li>Handle asynchronous success and failure states.</li>
+</ol>
+<p>The generic pattern is:</p>
+<pre><code class="language-javascript">grecaptcha.ready(function () {
+    grecaptcha.execute(siteKey, {
+        action: &quot;...&quot;
+    }).then(function (token) {
+        // Submit the token with the protected request.
+    });
+});
+</code></pre>
+<p>The current implementation uses:</p>
+<pre><code class="language-text">action = &quot;contact&quot;
+</code></pre>
+<p>and:</p>
+<pre><code class="language-text">g-recaptcha-response
+</code></pre>
+<p>as the token field.</p>
+<h3 id="3-backend"><a href="#3-backend" id="3-backend" name="3-backend" class="anchor"></a>3. Backend</h3>
+<p>The backend must:</p>
+<ol>
+<li>Register a route for the protected request.</li>
+<li>Read the submitted token.</li>
+<li>Resolve the minimum accepted score.</li>
+<li>Send <code>secret</code> and <code>response</code> to Google's <code>siteverify</code> endpoint.</li>
+<li>Validate Google's response.</li>
+<li>Validate the expected action.</li>
+<li>Validate the score.</li>
+<li>Reject the request before business processing if verification fails.</li>
+<li>Continue with the protected operation only after successful
+verification.</li>
+<li>Avoid logging the secret or raw token.</li>
+</ol>
+<p>The current implementation uses:</p>
+<pre><code class="language-text">POST /bxcontactus
+→ Site.doContactbx()
+→ RecaptchaV3Service.verify()
+</code></pre>
+<p>A different site would replace the route and handler with its own
+application architecture.</p>
+<h3 id="4-configuration"><a href="#4-configuration" id="4-configuration" name="4-configuration" class="anchor"></a>4. Configuration</h3>
+<p>A reusable implementation should keep these concerns separate:</p>
+<pre><code class="language-text">Public site key
+Server-side secret key
+Minimum score
+</code></pre>
+<p>The current ContentBox implementation uses:</p>
+<pre><code class="language-text">cb_recaptcha_site_key
+cb_recaptcha_secret_key
+cb_recaptcha_min_score
+</code></pre>
+<p>These names are implementation-specific. Another site does not need to
+use the same setting names.</p>
+<p>The important behavior is:</p>
+<pre><code class="language-text">site key → frontend
+secret key → server only
+minimum score → server validation
+</code></pre>
+<h3 id="5-form-integration"><a href="#5-form-integration" id="5-form-integration" name="5-form-integration" class="anchor"></a>5. Form Integration</h3>
+<p>The protected form must:</p>
+<ul>
+<li>Render the reCAPTCHA integration.</li>
+<li>Include the token in the submitted request.</li>
+<li>Submit to a backend endpoint that performs verification.</li>
+<li>Use the same action name on frontend and backend.</li>
+<li>Process the protected operation only after successful verification.</li>
+</ul>
+<p>For this repository, the ContentBox-specific implementation requires:</p>
+<pre><code class="language-text">{{{RecaptchaV3Element}}}
+</code></pre>
+<p>inside the <code>contact-form</code> Content Store entry.</p>
+<p>The form currently uses:</p>
+<pre><code class="language-html">&lt;form
+    method=&quot;post&quot;
+    id=&quot;contactForm&quot;
+    action=&quot;/bxcontactus&quot;&gt;
+</code></pre>
+<p>and the page renders the Content Store entry with:</p>
+<pre><code class="language-text">{{{ContentStore slug=&quot;contact-form&quot; }}}
+</code></pre>
+<p>These details are specific to this implementation and should not be
+treated as requirements of Google reCAPTCHA itself.</p>
+<hr />
+<h2 id="generic-vsboxlang--contentbox-specific"><a href="#generic-vsboxlang--contentbox-specific" id="generic-vsboxlang--contentbox-specific" name="generic-vsboxlang--contentbox-specific" class="anchor"></a>Generic vs. BoxLang / ContentBox-Specific</h2>
+<h3 id="generic-recaptcha-v3-concepts"><a href="#generic-recaptcha-v3-concepts" id="generic-recaptcha-v3-concepts" name="generic-recaptcha-v3-concepts" class="anchor"></a>Generic reCAPTCHA v3 concepts</h3>
+<p>The reusable security flow consists of:</p>
+<ul>
+<li>Google-issued public site key.</li>
+<li>Server-only secret key.</li>
+<li>Loading Google's JavaScript API.</li>
+<li>Calling <code>grecaptcha.execute()</code> on the protected action.</li>
+<li>Using a named action.</li>
+<li>Sending the generated token to the server.</li>
+<li>Server-side verification through <code>siteverify</code>.</li>
+<li>Checking Google's <code>success</code> result.</li>
+<li>Checking the returned action.</li>
+<li>Applying a score threshold.</li>
+<li>Generating a fresh token for each submission.</li>
+<li>Failing closed when verification fails.</li>
+<li>Keeping the secret key out of frontend code and logs.</li>
+</ul>
+<h3 id="boxlang--contentbox-specific-pieces"><a href="#boxlang--contentbox-specific-pieces" id="boxlang--contentbox-specific-pieces" name="boxlang--contentbox-specific-pieces" class="anchor"></a>BoxLang / ContentBox-specific pieces</h3>
+<p>The current implementation additionally depends on:</p>
+<ul>
+<li>ContentBox <code>ContentStore</code>.</li>
+<li>Content Store slug <code>contact-form</code>.</li>
+<li><code>RecaptchaV3Element</code>.</li>
+<li>ContentBox widget discovery.</li>
+<li>BoxLang theme widget resolution.</li>
+<li><code>Site.doContactbx()</code>.</li>
+<li><code>/bxcontactus</code>.</li>
+<li>ContentBox site discovery.</li>
+<li>ContentBox settings and setting services.</li>
+<li>ContentBox dependency injection.</li>
+<li>BoxLang HTTP and JSON APIs.</li>
+<li>ContentBox mail services.</li>
+<li>The current contact form's DOM structure.</li>
+<li>The current JSON/fetch response contract.</li>
+</ul>
+<p>These pieces would need to be replaced or adapted when implementing the
+same reCAPTCHA flow elsewhere.</p>
+<hr />
+<h2 id="current-coupling"><a href="#current-coupling" id="current-coupling" name="current-coupling" class="anchor"></a>Current Coupling</h2>
+<p>The current implementation is intentionally scoped to the BoxLang
+contact form. The following dependencies are important when considering
+future reuse.</p>
+<h3 id="contact-form"><a href="#contact-form" id="contact-form" name="contact-form" class="anchor"></a>Contact form</h3>
+<p>The widget currently assumes:</p>
+<pre><code class="language-text">contactForm
+g-recaptcha-response
+contactFormFeedback
+</code></pre>
+<p>It also assumes a single form instance and a submit button whose state
+can be changed.</p>
+<h3 id="endpoint"><a href="#endpoint" id="endpoint" name="endpoint" class="anchor"></a>Endpoint</h3>
+<p>The frontend hard-codes:</p>
+<pre><code class="language-text">/bxcontactus
+</code></pre>
+<p>The router maps it to:</p>
+<pre><code class="language-text">Site.doContactbx()
+</code></pre>
+<p>A different endpoint would require changes to the integration.</p>
+<h3 id="action"><a href="#action" id="action" name="action" class="anchor"></a>Action</h3>
+<p>Both frontend and backend currently use:</p>
+<pre><code class="language-text">contact
+</code></pre>
+<p>The verification service itself already accepts an action argument, but
+the widget and handler currently hard-code the contact action.</p>
+<h3 id="contentbox"><a href="#contentbox" id="contentbox" name="contentbox" class="anchor"></a>ContentBox</h3>
+<p>The current implementation relies on:</p>
+<ul>
+<li>ContentBox widget discovery.</li>
+<li>ContentBox site discovery.</li>
+<li>ContentBox settings.</li>
+<li>Content Store rendering.</li>
+<li>ContentBox dependency injection.</li>
+</ul>
+<h3 id="configuration-1"><a href="#configuration-1" id="configuration-1" name="configuration-1" class="anchor"></a>Configuration</h3>
+<p>The implementation expects:</p>
+<pre><code class="language-text">cb_recaptcha_site_key
+cb_recaptcha_secret_key
+cb_recaptcha_min_score
+</code></pre>
+<p>The site key and secret are site-specific. The minimum score currently
+supports a site-specific override with a global fallback.</p>
+<h3 id="mail-processing"><a href="#mail-processing" id="mail-processing" name="mail-processing" class="anchor"></a>Mail processing</h3>
+<p>The contact handler currently combines reCAPTCHA verification with:</p>
+<ul>
+<li>Email construction.</li>
+<li>Mail delivery.</li>
+<li>Success/failure response handling.</li>
+<li>Contact-specific recipient and subject configuration.</li>
+</ul>
+<p>This mail behavior is not inherently part of reCAPTCHA and would not
+belong in a generic verification widget.</p>
+<hr />
+<h2 id="next-steps"><a href="#next-steps" id="next-steps" name="next-steps" class="anchor"></a>Next Steps</h2>
+<p>The current implementation works for the BoxLang contact form, but the intended direction is to evolve the reCAPTCHA integration into a reusable global widget that can be used across sites and forms.</p>
+<div class="bxsites-table-wrap"><table class="table">
+<thead>
+<tr><th>Area</th><th>Status</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>BoxLang Integration</td><td>✅ Completed</td><td>reCAPTCHA v3 implemented for the BoxLang contact form.</td></tr>
+<tr><td>Reusable Widget</td><td>🔜 Planned</td><td>Extract the current implementation into a reusable reCAPTCHA v3 widget.</td></tr>
+<tr><td>Global Widget</td><td>🔜 Planned</td><td>Make the widget available globally so it can be used by multiple sites and forms.</td></tr>
+<tr><td>Configurable Actions</td><td>🔜 Planned</td><td>Allow the widget to receive the reCAPTCHA action instead of hard-coding <code>contact</code>.</td></tr>
+<tr><td>Form Integration</td><td>🔜 Planned</td><td>Allow different forms to use the widget without duplicating the implementation.</td></tr>
+<tr><td>Documentation</td><td>🔄 In Progress</td><td>Document the current implementation, replication process, and reusable architecture.</td></tr>
+</tbody>
+</table></div>
+<h3 id="future-extraction-opportunities"><a href="#future-extraction-opportunities" id="future-extraction-opportunities" name="future-extraction-opportunities" class="anchor"></a>Future Extraction Opportunities</h3>
+<p>The current implementation identifies several areas that should be considered when evolving the widget:</p>
+<ol>
+<li>
+<p><strong>Configurable action</strong><br />
+The verification service already accepts an action, but the current widget is coupled to <code>contact</code>.</p>
+</li>
+<li>
+<p><strong>Configurable endpoint</strong><br />
+The current widget posts directly to <code>/bxcontactus</code>.</p>
+</li>
+<li>
+<p><strong>Form and element targeting</strong><br />
+The current widget relies on fixed DOM IDs and a single-form model.</p>
+</li>
+<li>
+<p><strong>Reusable verification service</strong><br />
+<code>RecaptchaV3Service.verify()</code> is already separated from the contact handler, making the verification logic a natural reusable boundary.</p>
+</li>
+<li>
+<p><strong>Configuration abstraction</strong><br />
+The verification logic itself does not inherently require ContentBox. The current dependency is primarily in how configuration and the current site are resolved.</p>
+</li>
+<li>
+<p><strong>Multiple widget instances</strong><br />
+The current global submission state and fixed selectors would need to be generalized before supporting multiple forms on the same page.</p>
+</li>
+<li>
+<p><strong>Reusable response handling</strong><br />
+The current frontend expects a contact-form-specific JSON response containing <code>success</code> and <code>message</code>. A global widget should not depend on that contract.</p>
+</li>
+<li>
+<p><strong>Score policy</strong><br />
+The current site-specific → global → <code>0.5</code> resolution is ContentBox-specific and should remain configurable when the integration becomes reusable.</p>
+</li>
+</ol>
+<p>The goal is to preserve the secure server-side verification model while removing the assumptions that currently tie the implementation to a single BoxLang contact form.</p>
+
+        </div>
+    </article>
+
+
+
+					<!-- ================= RIGHT SIDEBAR (Table of Contents) ================= -->
+					<aside class="hidden border-l border-slate-200 px-6 py-12 xl:block dark:border-white/10">
+						<div class="sticky top-28">
+							<div class="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+								On this page
+							</div>
+							<ul class="space-y-2 border-l border-slate-200 pl-4 text-sm dark:border-white/10" role="list"><li><a href="#overview" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Overview</a></li><li><a href="#how-it-works" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">How It Works</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#1-contentbox-renders-the-contact-form" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">1. ContentBox renders the contact form</a></li><li><a href="#2-the-widget-prepares-recaptcha" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">2. The widget prepares reCAPTCHA</a></li><li><a href="#3-a-token-is-generated-when-the-user-submits-the-form" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">3. A token is generated when the user submits the form</a></li><li><a href="#4-the-form-sends-the-token-to-the-backend" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">4. The form sends the token to the backend</a></li><li><a href="#5-the-backend-verifies-the-token" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">5. The backend verifies the token</a></li><li><a href="#6-recaptchav3service-contacts-google" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">6. RecaptchaV3Service contacts Google</a></li><li><a href="#7-the-response-is-validated" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">7. The response is validated</a></li><li><a href="#8-the-form-is-processed-only-after-verification" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">8. The form is processed only after verification</a></li></ul></li><li><a href="#configuration" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Configuration</a></li><li><a href="#cb-recaptcha-min-score----minimum-accepted--global-with-------05risk-score--------site-specific-----override" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">cb_recaptcha_min_score Minimum accepted Global with 0.5 risk score site-specific override</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#site-key" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Site Key</a></li><li><a href="#secret-key" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Secret Key</a></li><li><a href="#minimum-score" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Minimum Score</a></li></ul></li><li><a href="#google-configuration" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Google Configuration</a></li><li><a href="#action-validation" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Action Validation</a></li><li><a href="#server-side-verification" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Server-Side Verification</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#google-verification-request" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Google Verification Request</a></li><li><a href="#validation-rules" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Validation Rules</a></li></ul></li><li><a href="#frontend-integration" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Frontend Integration</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#frontend-failure-handling" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Frontend Failure Handling</a></li><li><a href="#environment-behavior" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Environment Behavior</a></li></ul></li><li><a href="#implementing-on-another-site" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Implementing on Another Site</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#1-google-setup" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">1. Google Setup</a></li><li><a href="#2-frontend" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">2. Frontend</a></li><li><a href="#3-backend" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">3. Backend</a></li><li><a href="#4-configuration" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">4. Configuration</a></li><li><a href="#5-form-integration" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">5. Form Integration</a></li></ul></li><li><a href="#generic-vsboxlang--contentbox-specific" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Generic vs.&nbsp;BoxLang &#x2f; ContentBox-Specific</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#generic-recaptcha-v3-concepts" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Generic reCAPTCHA v3 concepts</a></li><li><a href="#boxlang--contentbox-specific-pieces" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">BoxLang &#x2f; ContentBox-specific pieces</a></li></ul></li><li><a href="#current-coupling" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Current Coupling</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#contact-form" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Contact form</a></li><li><a href="#endpoint" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Endpoint</a></li><li><a href="#action" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Action</a></li><li><a href="#contentbox" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">ContentBox</a></li><li><a href="#configuration-1" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Configuration</a></li><li><a href="#mail-processing" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Mail processing</a></li></ul></li><li><a href="#next-steps" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Next Steps</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#future-extraction-opportunities" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Future Extraction Opportunities</a></li></ul></li></ul>
+						</div>
+					</aside>
+
+
+				</div>
+			</main>
+
+		</div>
+	</div>
+
+	<!-- BxSites JS Assets -->
+	<script src="/ortus-ui/assets/vendor/highlight/highlight.min.js"></script>
+	<script src="/ortus-ui/assets/highlight-boxlang.js"></script>
+	<script>
+		// Highlight all fenced code blocks after Highlight.js and
+		// the custom BoxLang grammar have been loaded.
+		hljs.highlightAll();
+	</script>
+	<script src="/ortus-ui/assets/tabs.js"></script>
+	<script src="/ortus-ui/assets/admonition-collapse.js"></script>
+	<script src="/ortus-ui/assets/copy-code.js"></script>
+	<script src="/ortus-ui/assets/code-lines.js"></script>
+	<script src="/ortus-ui/assets/prompt-init.js"></script>
+
+	<!-- Client JavaScript -->
+	<script>
+		const themeToggle = document.getElementById("themeToggle");
+		const moonIcon = document.getElementById("moonIcon");
+		const sunIcon = document.getElementById("sunIcon");
+
+		function updateThemeIcons() {
+			const isDark = document.documentElement.classList.contains("dark");
+			moonIcon.classList.toggle("hidden", !isDark);
+			sunIcon.classList.toggle("hidden", isDark);
+		}
+
+		themeToggle.addEventListener("click", () => {
+			document.documentElement.classList.toggle("dark");
+			updateThemeIcons();
+		});
+
+		const mobileMenuButton = document.getElementById("mobileMenuButton");
+		const sidebar = document.getElementById("sidebar");
+
+		mobileMenuButton.addEventListener("click", () => {
+			sidebar.classList.toggle("hidden");
+		});
+	</script>
+</body>
+</html>
