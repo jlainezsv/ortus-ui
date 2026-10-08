@@ -1,0 +1,719 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Turnstile - ORTUS UI</title>
+
+	<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+		<meta name="description" content="Front-End&#x20;Documentation" />
+	</cfif>
+
+	<!-- Tailwind CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/bxsites.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="/assets/theme/style.d821151a.css"
+	/>
+
+	<!-- Highlight.js -->
+	<link rel="stylesheet" href="/assets/vendor/highlight/github.min.css" />
+
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+			theme: {
+				extend: {
+					colors: {
+						ortus: {
+							light: "#A9DD2F",
+							med: "#2DBA95",
+							dark: "#232530",
+						},
+					},
+				},
+			},
+		};
+	</script>
+</head>
+
+<body class="min-h-screen bg-white text-slate-900 antialiased dark:bg-[#0F121A] dark:text-slate-100">
+
+	<div class="min-h-screen">
+
+		<!-- ================= TOP BAR ================= -->
+		<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur dark:border-white/10 dark:bg-[#151923]/95">
+			<div class="mx-auto flex h-16 items-center px-5 lg:px-8">
+
+				
+
+				<!-- Logo / Brand -->
+				<a href="/" class="flex items-center gap-3">
+					<div class="flex h-8 w-8 items-center justify-center">
+						<img 
+              src="/assets/theme/images/ortus-icon-full.svg" 
+              alt="Ortus Logo"
+              class="h-full w-full object-contain"
+            />
+					</div>
+
+					<div class="hidden sm:block">
+						<div class="text-sm font-semibold tracking-tight">
+							ORTUS UI
+						</div>
+						<cfif structKeyExists( variables.siteConfig, "description" ) AND len( variables.siteConfig.description )>
+							<div class="text-[11px] text-slate-500 dark:text-slate-400">
+								Front-End Documentation
+							</div>
+						</cfif>
+					</div>
+				</a>
+
+				<!-- Header Right Actions -->
+				<div class="ml-auto flex items-center gap-3">
+					<cfif structKeyExists( variables.siteConfig, "repo" ) AND isStruct( variables.siteConfig.repo ) AND structKeyExists( variables.siteConfig.repo, "url" )>
+						<a 
+							href="" 
+							target="_blank" 
+							rel="noopener noreferrer" 
+							class="hidden rounded-lg px-3 py-2 text-sm text-slate-500 hover:bg-slate-100 hover:text-slate-900 sm:block dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+						>
+							GitHub
+						</a>
+					</cfif>
+
+					<!-- Dark Mode Toggle -->
+					<button id="themeToggle" type="button" class="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" aria-label="Toggle theme">
+						<svg id="moonIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+						<svg id="sunIcon" class="hidden h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+					</button>
+				</div>
+
+        <!-- Mobile menu toggle -->
+				<button
+					id="mobileMenuButton"
+					type="button"
+					class="mr-3 rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900 lg:hidden dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
+					aria-label="Open navigation"
+				>
+					☰
+				</button>
+			</div>
+		</header>
+
+		<!-- ================= PAGE CONTENT ================= -->
+		<div class="mx-auto flex">
+
+			<!-- ================= LEFT SIDEBAR (Navegación del sitio) ================= -->
+			<aside id="sidebar" class="fixed inset-y-16 left-0 z-40 hidden w-72 overflow-y-auto border-r border-slate-200 bg-white px-5 py-7 lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] dark:border-white/10 dark:bg-[#121620]">
+				
+
+
+<nav class="space-y-4">
+    
+        <ul class="space-y-1"><li><a href="/boxlang/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">BOXLANG</a></li><li><div class="mb-2 mt-4 px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">components</div><ul class="space-y-1"><li><a href="/boxlang/components/sidebar-v2/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">Playbook Sidebar</a></li></ul></li><li><div class="mb-2 mt-4 px-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">security</div><ul class="space-y-1"><li><a href="/boxlang/security/recaptcha-v3/index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white">reCAPTCHA v3</a></li><li><a href="/boxlang/security/cloudflare-turnstile-security-implementation/index.html" class="block rounded-lg px-3 py-2 text-sm bg-emerald-400/10 font-medium text-emerald-300" aria-current="page">Turnstile</a></li></ul></li></ul>
+    
+</nav>
+
+			</aside>
+
+			<!-- ================= MAIN CONTENT & RIGHT SIDEBAR ================= -->
+			<main class="min-w-0 flex-1">
+				<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_220px]">
+
+
+					
+
+
+
+    <article class="min-w-0 px-6 py-10 sm:px-10 lg:px-14 lg:py-12">
+        
+            <nav aria-label="Breadcrumb" class="mb-4"><ol class="flex flex-wrap items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400"><li><a href="/" class="hover:text-slate-900 dark:hover:text-white transition-colors">Hub</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li><a href="/boxlang/index.html" class="hover:text-slate-900 dark:hover:text-white transition-colors">Overview</a></li><li aria-hidden="true" class="select-none text-slate-300 dark:text-slate-600">/</li><li aria-current="page" class="font-medium text-slate-900 dark:text-white">Turnstile</li></ol></nav>
+        
+        <header class="mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Turnstile</h1>
+            
+                <p class="mt-2 text-lg text-slate-600 dark:text-slate-300">Implementation of Cloudflare Turnstile and a Second Security Layer</p>
+            
+        </header>
+
+        <div class="prose max-w-none dark:prose-invert" id="page-content">
+            <h2 id="1-objective"><a href="#1-objective" id="1-objective" name="1-objective" class="anchor"></a>1. Objective</h2>
+<p>This document describes the implementation applied to the BoxLang site's contact form and serves as a guide for replicating it on another ContentBox/ColdBox/BoxLang site within the company.</p>
+<p>The solution has two main layers:</p>
+<ol>
+<li><strong>Cloudflare Turnstile</strong>: proves server-side that the request comes from an interaction accepted by Cloudflare.</li>
+<li><strong>Server-side validation and business rules</strong>: blocks unwanted requests even if a client attempts to bypass JavaScript or send a direct HTTP request.</li>
+</ol>
+<p>Turnstile does not replace server-side validation. The browser token is always considered untrusted input until Cloudflare accepts it through <strong><code>siteverify</code></strong>.</p>
+<h2 id="2-current-scope"><a href="#2-current-scope" id="2-current-scope" name="2-current-scope" class="anchor"></a>2. Current Scope</h2>
+<p>The implementation described corresponds to the BoxLang flow:</p>
+<ul>
+<li>Form: BoxLang contact form.</li>
+<li>Endpoint: <strong><code>POST /bxcontactus</code></strong>.</li>
+<li>Handler: <strong><code>Site.doContactbx</code></strong>.</li>
+<li>Widget: <strong><code>TurnstileElement</code></strong>.</li>
+<li>Verification service: <strong><code>TurnstileService</code></strong>.</li>
+<li>Configuration: per-site ContentBox settings.</li>
+</ul>
+<p>Legacy forms on the site, such as <strong><code>/contactus</code></strong>, <strong><code>/sendtips</code></strong>, and other existing forms, continue to use <strong><code>cbReCaptcha</code></strong>. Do not assume that all forms on the site use Turnstile simply because this module exists.</p>
+<h2 id="3-implementation-files"><a href="#3-implementation-files" id="3-implementation-files" name="3-implementation-files" class="anchor"></a>3. Implementation Files</h2>
+<div class="bxsites-table-wrap"><table class="table">
+<thead>
+<tr><th>Responsibility</th><th>File</th></tr>
+</thead>
+<tbody>
+<tr><td>HTTP Route</td><td><strong><code>config/Router.cfc</code></strong></td></tr>
+<tr><td>Handler and server-side rules</td><td><strong><code>handlers/Site.cfc</code></strong></td></tr>
+<tr><td>Service that queries Cloudflare</td><td><strong><code>modules_app/contentbox-custom/models/turnstile/TurnstileService.cfc</code></strong></td></tr>
+<tr><td>Form widget</td><td><strong><code>modules_app/contentbox-custom/_themes/boxlang/widgets/TurnstileElement.cfc</code></strong></td></tr>
+<tr><td>Cloudflare script registration</td><td><strong><code>modules_app/contentbox-custom/ModuleConfig.cfc</code></strong></td></tr>
+<tr><td>Additional blocking configuration</td><td><strong><code>config/Coldbox.cfc</code></strong>, setting <strong><code>contacts_blacklist</code></strong></td></tr>
+</tbody>
+</table></div>
+<h2 id="4-complete-flow"><a href="#4-complete-flow" id="4-complete-flow" name="4-complete-flow" class="anchor"></a>4. Complete Flow</h2>
+<pre><code class="language-text">User
+
+  |
+  | 1. Opens the form
+  v
+
+ContentBox / BoxLang theme
+
+  |
+  | 2. Module adds api.js only if a site key exists
+  | 3. Widget explicitly renders Turnstile
+  v
+
+Cloudflare Turnstile
+
+  |
+  | 4. Injects the hidden cf-turnstile-response field
+  v
+
+Browser
+
+  |
+  | 5. POST /bxcontactus with FormData + token
+  v
+
+Site.doContactbx
+
+  |
+  | 6. Checks blacklist and normalizes parameters
+  | 7. Sends token to Cloudflare /siteverify
+  | 8. Checks success, action, and hostname
+  | 9. Checks message length and content
+  v
+
+MailService
+
+  |
+  | 10. Only after all validations is the email sent
+  v
+
+AJAX JSON response
+</code></pre>
+<p>The important condition is that the email is sent last. A client can remove the widget, modify the JavaScript, or call the endpoint directly, but it cannot trigger a valid send without passing the server-side checks.</p>
+<h2 id="5-per-site-configuration"><a href="#5-per-site-configuration" id="5-per-site-configuration" name="5-per-site-configuration" class="anchor"></a>5. Per-Site Configuration</h2>
+<p>Two ContentBox settings are used:</p>
+<div class="bxsites-table-wrap"><table class="table">
+<thead>
+<tr><th>Setting</th><th>Usage</th><th>Sensitivity</th></tr>
+</thead>
+<tbody>
+<tr><td><strong><code>cb_turnstile_site_key</code></strong></td><td>Public key used by the browser to render Turnstile</td><td>Public</td></tr>
+<tr><td><strong><code>cb_turnstile_secret_key</code></strong></td><td>Private key sent to Cloudflare in <strong><code>siteverify</code></strong></td><td>Secret</td></tr>
+</tbody>
+</table></div>
+<p>The names are defined in:</p>
+<ul>
+<li><strong><code>TurnstileService.cfc</code></strong>: reads the site key and secret key.</li>
+<li><strong><code>TurnstileElement.cfc</code></strong>: reads the site key for the HTML/JavaScript.</li>
+<li><strong><code>ModuleConfig.cfc</code></strong>: detects the site key to load the script.</li>
+</ul>
+<h3 id="configuration-rules"><a href="#configuration-rules" id="configuration-rules" name="configuration-rules" class="anchor"></a>Configuration Rules</h3>
+<ul>
+<li>Create the keys in Cloudflare Turnstile for the site's actual hostname.</li>
+<li>Also register staging hostnames if they will be tested outside production.</li>
+<li>Store the secret key only as a protected setting or secure deployment variable.</li>
+<li>Do not include the secret key in JavaScript, HTML, the repository, screenshots, or logs.</li>
+<li>Configure both settings for the same ContentBox site. The service resolves the current site using <strong><code>siteService.discoverSite().getSlug()</code></strong>.</li>
+<li>If <strong><code>cb_turnstile_site_key</code></strong> does not exist, the script is not loaded and the widget returns empty HTML.</li>
+<li>If <strong><code>cb_turnstile_secret_key</code></strong> does not exist, verification fails safely and no email is sent.</li>
+</ul>
+<p>Conceptual example of the values (use real values only in the administrator or secret store):</p>
+<pre><code class="language-text">Site: BoxLang
+
+cb_turnstile_site_key: 0x4AAAA...
+
+cb_turnstile_secret_key: 0x4AAAA...
+</code></pre>
+<h2 id="6-conditional-script-loading"><a href="#6-conditional-script-loading" id="6-conditional-script-loading" name="6-conditional-script-loading" class="anchor"></a>6. Conditional Script Loading</h2>
+<p><strong><code>ModuleConfig.cfc</code></strong> registers an interceptor for <strong><code>cbui_beforeHeadEnd</code></strong>. The interceptor checks the current site key and adds the following once:</p>
+<pre><code class="language-html">&lt;script src=&quot;https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Loading is conditional for two reasons:</p>
+<ol>
+<li>Do not load Cloudflare JavaScript on sites that do not have Turnstile configured.</li>
+<li>Avoid duplicates if another component has already added the same URL.</li>
+</ol>
+<p>Pattern to replicate:</p>
+<pre><code class="language-cfml">function cbui_beforeHeadEnd(event, interceptData, buffer) {
+
+    if (!len(getCurrentTurnstileSiteKey(arguments.event))) {
+        return;
+    }
+
+    if (toString(arguments.buffer).findNoCase(variables.turnstileScriptUrl) &gt; 0) {
+        return;
+    }
+
+    arguments.buffer.append(
+        '&lt;script src=&quot;' &amp; variables.turnstileScriptUrl &amp; '&quot;&gt;&lt;/script&gt;'
+    );
+}
+</code></pre>
+<h2 id="7-widget-rendering"><a href="#7-widget-rendering" id="7-widget-rendering" name="7-widget-rendering" class="anchor"></a>7. Widget Rendering</h2>
+<p>The widget uses the explicit rendering API. This allows control over the <strong><code>sitekey</code></strong>, <strong><code>action</code></strong>, appearance, size, and response field name.</p>
+<p>Current configuration:</p>
+<pre><code class="language-text">action: contact
+size: flexible
+appearance: execute
+theme: auto
+response-field: true
+response-field-name: cf-turnstile-response
+</code></pre>
+<p>Client-side rendering example:</p>
+<pre><code class="language-html">&lt;div id=&quot;turnstileWidget&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    window.turnstileContactWidget = function () {
+        var container = document.getElementById(&quot;turnstileWidget&quot;);
+
+        if (!container || container.dataset.turnstileRendered === &quot;1&quot;) {
+            return;
+        }
+
+        if (!window.turnstile || typeof window.turnstile.render !== &quot;function&quot;) {
+            return;
+        }
+
+        container.dataset.turnstileRendered = &quot;1&quot;;
+
+        window.turnstile.render(container, {
+            sitekey: &quot;PUBLIC_SITE_KEY&quot;,
+            action: &quot;contact&quot;,
+            theme: &quot;auto&quot;,
+            size: &quot;flexible&quot;,
+            appearance: &quot;execute&quot;,
+            &quot;response-field&quot;: true,
+            &quot;response-field-name&quot;: &quot;cf-turnstile-response&quot;
+        });
+    };
+
+    if (window.turnstile) {
+        window.turnstile.ready(window.turnstileContactWidget);
+    }
+&lt;/script&gt;
+</code></pre>
+<p>In the actual implementation, the site key is inserted from the site setting. When producing HTML with configuration values, appropriate attribute/JavaScript encoding must be applied. The secret key must never be inserted into this block.</p>
+<p>The hidden field generated by Turnstile is automatically submitted with <strong><code>FormData</code></strong>:</p>
+<pre><code class="language-text">cf-turnstile-response=&lt;single-use-token&gt;
+</code></pre>
+<p>Tokens are single-use and expire. Therefore, they must not be stored for later retries or reused after a rejected response.</p>
+<h2 id="8-ajax-form-submission"><a href="#8-ajax-form-submission" id="8-ajax-form-submission" name="8-ajax-form-submission" class="anchor"></a>8. AJAX Form Submission</h2>
+<p>The widget connects the form to the endpoint and submits all its fields, including the token generated by Turnstile:</p>
+<pre><code class="language-javascript">form.addEventListener(&quot;submit&quot;, function (event) {
+    event.preventDefault();
+
+    fetch(&quot;/bxcontactus&quot;, {
+        method: &quot;POST&quot;,
+        body: new FormData(form),
+        headers: {
+            &quot;X-Requested-With&quot;: &quot;fetch&quot;
+        }
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        if (data.success) {
+            form.reset();
+        }
+    });
+});
+</code></pre>
+<p>The <strong><code>X-Requested-With: fetch</code></strong> header allows the handler to return JSON for the AJAX experience. It is not a security measure: an attacker can forge it.</p>
+<p>The client also:</p>
+<ul>
+<li>Prevents double submission while the request is pending.</li>
+<li>Disables the button if the message has fewer than 20 characters.</li>
+<li>Displays error messages without reloading the page.</li>
+</ul>
+<p>These validations improve the user experience, but the server repeats them because the browser is not a trust boundary.</p>
+<h2 id="9-server-side-verification-against-cloudflare"><a href="#9-server-side-verification-against-cloudflare" id="9-server-side-verification-against-cloudflare" name="9-server-side-verification-against-cloudflare" class="anchor"></a>9. Server-Side Verification Against Cloudflare</h2>
+<p>The <strong><code>TurnstileService</code></strong> is a singleton and centralizes all verification. It receives:</p>
+<pre><code class="language-cfml">turnstileService.verify(
+    token  = rc[&quot;cf-turnstile-response&quot;],
+    action = &quot;contact&quot;
+)
+</code></pre>
+<p>It then makes a form-encoded <strong><code>POST</code></strong> to:</p>
+<pre><code class="language-text">https://challenges.cloudflare.com/turnstile/v0/siteverify
+</code></pre>
+<p>Parameters sent:</p>
+<pre><code class="language-text">secret   = site's secret key
+response = token received from the browser
+remoteip = client IP, when available
+</code></pre>
+<p>Reduced and portable example:</p>
+<pre><code class="language-cfml">struct function verify(required string token, string action = &quot;&quot;) {
+
+    var result = {
+        success: false,
+        action: &quot;&quot;,
+        hostname: &quot;&quot;,
+        errorCodes: [],
+        errorMessage: &quot;&quot;
+    };
+
+    if (!len(trim(arguments.token))) {
+        result.errorCodes = [&quot;missing-input-response&quot;];
+        result.errorMessage = &quot;Turnstile token is required.&quot;;
+        return result;
+    }
+
+    var httpService = new http(
+        method = &quot;post&quot;,
+        url = &quot;https://challenges.cloudflare.com/turnstile/v0/siteverify&quot;,
+        timeout = 10
+    );
+
+    httpService.addParam(
+        type = &quot;formfield&quot;,
+        name = &quot;secret&quot;,
+        value = getSecretKey()
+    );
+
+    httpService.addParam(
+        type = &quot;formfield&quot;,
+        name = &quot;response&quot;,
+        value = arguments.token
+    );
+
+    var response = httpService.send().getPrefix();
+    var payload = deserializeJSON(response.fileContent ?: &quot;{}&quot;);
+
+    if (!isStruct(payload) || !payload.success) {
+        result.errorMessage = &quot;Cloudflare rejected the Turnstile token.&quot;;
+        return result;
+    }
+
+    if (len(arguments.action) &amp;&amp; payload.action != arguments.action) {
+        result.errorCodes = [&quot;action-mismatch&quot;];
+        result.errorMessage = &quot;The Turnstile action was invalid.&quot;;
+        return result;
+    }
+
+    result.success = true;
+    result.action = payload.action ?: &quot;&quot;;
+    result.hostname = payload.hostname ?: &quot;&quot;;
+    return result;
+}
+</code></pre>
+<p>The actual implementation is stricter than this example and also:</p>
+<ul>
+<li>Rejects tokens longer than 2048 characters.</li>
+<li>Uses a 10-second HTTP timeout.</li>
+<li>Handles unsuccessful HTTP status codes.</li>
+<li>Handles empty responses or unexpected JSON.</li>
+<li>Preserves <strong><code>error-codes</code></strong>, <strong><code>action</code></strong>, <strong><code>hostname</code></strong>, <strong><code>challenge_ts</code></strong>, and <strong><code>cdata</code></strong>.</li>
+<li>Logs failures in LogBox without exposing the token or secret.</li>
+<li>Rejects the response if <strong><code>success</code></strong> is missing or false.</li>
+<li>Rejects <strong><code>action</code></strong> values other than <strong><code>contact</code></strong>.</li>
+<li>Compares the hostname returned by Cloudflare with the public hostname of the request.</li>
+</ul>
+<h2 id="10-hostname-and-ip-resolution"><a href="#10-hostname-and-ip-resolution" id="10-hostname-and-ip-resolution" name="10-hostname-and-ip-resolution" class="anchor"></a>10. Hostname and IP Resolution</h2>
+<p>To validate the hostname, the service uses this priority:</p>
+<ol>
+<li><strong><code>X-Forwarded-Host</code></strong></li>
+<li><strong><code>Host</code></strong></li>
+<li><strong><code>cgi.http_host</code></strong></li>
+</ol>
+<p>The port is removed and the value is compared in lowercase with the hostname returned by Cloudflare.</p>
+<p>To send <strong><code>remoteip</code></strong>, it uses this priority:</p>
+<ol>
+<li><strong><code>cf-connecting-ip</code></strong></li>
+<li><strong><code>x-cluster-client-ip</code></strong></li>
+<li><strong><code>X-Forwarded-For</code></strong></li>
+<li><strong><code>cgi.remote_addr</code></strong></li>
+<li><strong><code>127.0.0.1</code></strong> as the final fallback.</li>
+</ol>
+<p>When replicating this behind a proxy, load balancer, or CDN, only accept IP headers that the trusted proxy overwrites and controls. Do not blindly trust headers sent by the client from the Internet.</p>
+<h2 id="11-second-layer-server-side-form-rules"><a href="#11-second-layer-server-side-form-rules" id="11-second-layer-server-side-form-rules" name="11-second-layer-server-side-form-rules" class="anchor"></a>11. Second Layer: Server-Side Form Rules</h2>
+<h3 id="111-email-blacklist"><a href="#111-email-blacklist" id="111-email-blacklist" name="111-email-blacklist" class="anchor"></a>11.1 Email Blacklist</h3>
+<p>Before processing the submission, <strong><code>doContactbx</code></strong> compares the email against the <strong><code>contacts_blacklist</code></strong> setting. If it finds a match, it responds as if the request had been accepted, but does not send email.</p>
+<p>This behavior is deliberately silent so that it does not confirm to the abuser that their address is blocked.</p>
+<p>The list is currently configured in <strong><code>config/Coldbox.cfc</code></strong>:</p>
+<pre><code class="language-cfml">settings = {
+    contacts_blacklist: [
+        &quot;blocked@example.com&quot;
+    ]
+};
+</code></pre>
+<p>For another site, it is recommended to keep the list outside the code when possible, normalize the email before comparison, and record internal metrics without revealing the list to the user.</p>
+<h3 id="112-required-token-and-actionhostname-verification"><a href="#112-required-token-and-actionhostname-verification" id="112-required-token-and-actionhostname-verification" name="112-required-token-and-actionhostname-verification" class="anchor"></a>11.2 Required Token and Action/Hostname Verification</h3>
+<p>The endpoint normalizes the parameter:</p>
+<pre><code class="language-cfml">event.paramValue(&quot;cf-turnstile-response&quot;, &quot;&quot;);
+</code></pre>
+<p>An empty token fails. A token valid for another action or hostname also fails. Therefore, simply copying a token generated for another form or domain is not sufficient.</p>
+<h3 id="113-server-side-message-validation"><a href="#113-server-side-message-validation" id="113-server-side-message-validation" name="113-server-side-message-validation" class="anchor"></a>11.3 Server-Side Message Validation</h3>
+<p>Content validation is performed only if Turnstile is valid:</p>
+<pre><code class="language-cfml">var trimmedMessage = trim(rc.message);
+
+if (len(trimmedMessage) &lt; 20) {
+    arrayAppend(errors, &quot;Please provide at least 20 characters in your message.&quot;);
+} else if (
+    len(trimmedMessage) &gt;= 15
+    &amp;&amp; !reFind(&quot;\s&quot;, trimmedMessage)
+    &amp;&amp; reFind(&quot;^[[:alnum:]]+$&quot;, trimmedMessage)
+) {
+    arrayAppend(errors, &quot;Please provide a more detailed message.&quot;);
+}
+</code></pre>
+<p>This blocks empty messages, messages that are too short, and alphanumeric strings without spaces that often indicate automated or low-value input. This rule is not intended to classify all spam; it is a second quality and abuse barrier.</p>
+<h3 id="114-order-of-checks"><a href="#114-order-of-checks" id="114-order-of-checks" name="114-order-of-checks" class="anchor"></a>11.4 Order of Checks</h3>
+<p>The current order is important:</p>
+<ol>
+<li>Normalize parameters.</li>
+<li>Apply blacklist.</li>
+<li>Verify Turnstile against Cloudflare.</li>
+<li>Validate the message.</li>
+<li>Build and send the email.</li>
+<li>Return JSON or redirect depending on the request type.</li>
+</ol>
+<p>The email send must never be moved before Turnstile verification and validation.</p>
+<h2 id="12-reference-handler"><a href="#12-reference-handler" id="12-reference-handler" name="12-reference-handler" class="anchor"></a>12. Reference Handler</h2>
+<p>This is a summarized example of the server-side endpoint:</p>
+<pre><code class="language-cfml">function doContactbx(event, rc, prc) {
+    var errors = [];
+    var isAjax = event.getHTTPHeader(&quot;X-Requested-With&quot;, &quot;&quot;);
+
+    event
+        .paramValue(&quot;email&quot;, &quot;&quot;)
+        .paramValue(&quot;message&quot;, &quot;&quot;)
+        .paramValue(&quot;cf-turnstile-response&quot;, &quot;&quot;);
+
+    if (arrayFind(blacklist, rc.email)) {
+        if (isAjax == &quot;fetch&quot;) {
+            return {
+                success: false,
+                message: &quot;Thank you, we will respond shortly!&quot;
+            };
+        }
+
+        relocate(&quot;/&quot;);
+    }
+
+    var turnstileResult = turnstileService.verify(
+        token = rc[&quot;cf-turnstile-response&quot;],
+        action = &quot;contact&quot;
+    );
+
+    if (!turnstileResult.success) {
+        arrayAppend(errors, &quot;We couldn't send your message. Please try again.&quot;);
+    }
+
+    if (turnstileResult.success &amp;&amp; len(trim(rc.message)) &lt; 20) {
+        arrayAppend(errors, &quot;Please provide at least 20 characters in your message.&quot;);
+    }
+
+    if (arrayLen(errors)) {
+        if (isAjax == &quot;fetch&quot;) {
+            return {
+                success: false,
+                message: errors.toList(&quot; &quot;)
+            };
+        }
+
+        return relocate(&quot;/?cbcache=true&quot;);
+    }
+
+    // Build and send the email here, after all validations.
+    return {
+        success: true,
+        message: &quot;Thank you, we will respond shortly!&quot;
+    };
+}
+</code></pre>
+<p>The actual code retains the complete form fields, mail error handling, and responses for both AJAX and traditional requests.</p>
+<h2 id="13-replication-checklist"><a href="#13-replication-checklist" id="13-replication-checklist" name="13-replication-checklist" class="anchor"></a>13. Replication Checklist</h2>
+<h3 id="cloudflare"><a href="#cloudflare" id="cloudflare" name="cloudflare" class="anchor"></a>Cloudflare</h3>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Create a Turnstile widget for each required hostname.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Register production and staging separately when appropriate.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Store the site key and secret key.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Confirm that the hostname returned by Cloudflare matches the public hostname.</li>
+</ul>
+<h3 id="contentbox"><a href="#contentbox" id="contentbox" name="contentbox" class="anchor"></a>ContentBox</h3>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Create <strong><code>cb_turnstile_site_key</code></strong> in the site settings.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Create <strong><code>cb_turnstile_secret_key</code></strong> in the site settings.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Verify that both settings belong to the same site slug.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Do not version-control the secret key.</li>
+</ul>
+<h3 id="coldbox--module"><a href="#coldbox--module" id="coldbox--module" name="coldbox--module" class="anchor"></a>ColdBox / Module</h3>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Register <strong><code>TurnstileService</code></strong> as a singleton model or use auto-mapping.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Register the <strong><code>api.js</code></strong> loading interceptor.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Include the widget in the correct form.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Add a dedicated POST route to the handler.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Inject the service into the handler.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Maintain the timeout, token limit, and error handling.</li>
+</ul>
+<h3 id="form"><a href="#form" id="form" name="form" class="anchor"></a>Form</h3>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Render Turnstile with <strong><code>response-field</code></strong> enabled.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Use a form-specific <strong><code>action</code></strong>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Submit <strong><code>FormData</code></strong> to include the hidden token.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Prevent double submission while a request is active.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Do not trust JavaScript validation.</li>
+</ul>
+<h3 id="server"><a href="#server" id="server" name="server" class="anchor"></a>Server</h3>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Reject missing, oversized, expired, or reused tokens.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Check <strong><code>success</code></strong>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Check <strong><code>action</code></strong>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Check <strong><code>hostname</code></strong>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Validate email, message, and input limits.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Apply blacklist or anti-abuse rules before sending email.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Log failures without logging secrets or complete tokens.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Review trust in <strong><code>X-Forwarded-*</code></strong> according to the actual proxy.</li>
+</ul>
+<h2 id="14-test-plan"><a href="#14-test-plan" id="14-test-plan" name="14-test-plan" class="anchor"></a>14. Test Plan</h2>
+<h3 id="functional-tests"><a href="#functional-tests" id="functional-tests" name="functional-tests" class="anchor"></a>Functional Tests</h3>
+<ol>
+<li>Open the form with both settings configured.</li>
+<li>Confirm that <strong><code>api.js</code></strong> appears only once.</li>
+<li>Confirm that the widget renders and creates <strong><code>cf-turnstile-response</code></strong>.</li>
+<li>Submit a valid message and confirm a successful JSON response.</li>
+<li>Confirm that only one email is received.</li>
+</ol>
+<h3 id="negative-tests"><a href="#negative-tests" id="negative-tests" name="negative-tests" class="anchor"></a>Negative Tests</h3>
+<ol>
+<li>Submit without <strong><code>cf-turnstile-response</code></strong>: it must fail and no email must be sent.</li>
+<li>Submit an invalid token: it must fail.</li>
+<li>Reuse the same token: it must fail because tokens are single-use.</li>
+<li>Submit a token with an action other than <strong><code>contact</code></strong>: it must fail.</li>
+<li>Submit a token issued for another hostname: it must fail.</li>
+<li>Submit a message with fewer than 20 characters: it must fail.</li>
+<li>Submit an alphanumeric string without spaces: it must fail when the rule applies.</li>
+<li>Submit an email from the blacklist: it must not generate an email and must not reveal the block.</li>
+<li>Remove JavaScript and make a direct POST: the server must continue rejecting the request without a valid token.</li>
+<li>Simulate a Cloudflare error or timeout: no email must be sent.</li>
+</ol>
+<h3 id="operational-tests"><a href="#operational-tests" id="operational-tests" name="operational-tests" class="anchor"></a>Operational Tests</h3>
+<ul>
+<li>Review LogBox for configuration errors, unsuccessful HTTP responses, and Cloudflare rejections.</li>
+<li>Verify that tokens or secret keys do not appear in logs.</li>
+<li>Test behind the actual proxy and confirm hostname/IP.</li>
+<li>Test staging with its hostname registered in Cloudflare.</li>
+<li>Confirm that legacy forms continue using their intended mechanism and do not accidentally depend on Turnstile.</li>
+</ul>
+<h2 id="15-limitations-and-recommended-improvements"><a href="#15-limitations-and-recommended-improvements" id="15-limitations-and-recommended-improvements" name="15-limitations-and-recommended-improvements" class="anchor"></a>15. Limitations and Recommended Improvements</h2>
+<p>The current implementation protects the flow against bots and automated input, but it is not a complete solution against volumetric abuse. For a higher-risk site, it is recommended to add:</p>
+<ul>
+<li>Rate limiting by IP, email, and time window at the edge or reverse proxy.</li>
+<li>CSRF token for authenticated endpoints or flows where the browser maintains a sensitive session.</li>
+<li>Length limits for all fields before building the email.</li>
+<li>Email normalization before checking the blacklist.</li>
+<li>A clear policy for trusted headers at the proxy.</li>
+<li>Rejection-rate metrics and alerts without storing sensitive data.</li>
+<li>Secret-key rotation and a revocation procedure.</li>
+<li>A CSP policy compatible with <strong><code>https://challenges.cloudflare.com</code></strong>.</li>
+</ul>
+<p>These improvements are complementary. They do not replace server-side Turnstile verification, <strong><code>action</code></strong> and hostname checks, or message validation.</p>
+<h2 id="16-summary-for-a-new-implementation"><a href="#16-summary-for-a-new-implementation" id="16-summary-for-a-new-implementation" name="16-summary-for-a-new-implementation" class="anchor"></a>16. Summary for a New Implementation</h2>
+<p>The minimum reproducible recipe is:</p>
+<ol>
+<li>Create the Turnstile widget and register the hostname.</li>
+<li>Store the site key and secret key as per-site settings.</li>
+<li>Load <strong><code>api.js</code></strong> only when the site key exists.</li>
+<li>Explicitly render Turnstile with a dedicated action.</li>
+<li>Send the token in a known field, for example <strong><code>cf-turnstile-response</code></strong>.</li>
+<li>Verify the token from the server using <strong><code>/siteverify</code></strong>.</li>
+<li>Require correct <strong><code>success</code></strong>, <strong><code>action</code></strong>, and <strong><code>hostname</code></strong> values.</li>
+<li>Perform email, blacklist, and content validation on the server.</li>
+<li>Send email only after all validations.</li>
+<li>Test positive cases, invalid tokens, replay, incorrect hostname/action, and direct POST requests.</li>
+</ol>
+
+        </div>
+    </article>
+
+
+
+					<!-- ================= RIGHT SIDEBAR (Table of Contents) ================= -->
+					<aside class="hidden border-l border-slate-200 px-6 py-12 xl:block dark:border-white/10">
+						<div class="sticky top-28">
+							<div class="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+								On this page
+							</div>
+							<ul class="space-y-2 border-l border-slate-200 pl-4 text-sm dark:border-white/10" role="list"><li><a href="#1-objective" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">1. Objective</a></li><li><a href="#2-current-scope" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">2. Current Scope</a></li><li><a href="#3-implementation-files" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">3. Implementation Files</a></li><li><a href="#4-complete-flow" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">4. Complete Flow</a></li><li><a href="#5-per-site-configuration" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">5. Per-Site Configuration</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#configuration-rules" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Configuration Rules</a></li></ul></li><li><a href="#6-conditional-script-loading" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">6. Conditional Script Loading</a></li><li><a href="#7-widget-rendering" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">7. Widget Rendering</a></li><li><a href="#8-ajax-form-submission" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">8. AJAX Form Submission</a></li><li><a href="#9-server-side-verification-against-cloudflare" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">9. Server-Side Verification Against Cloudflare</a></li><li><a href="#10-hostname-and-ip-resolution" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">10. Hostname and IP Resolution</a></li><li><a href="#11-second-layer-server-side-form-rules" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">11. Second Layer&#x3a; Server-Side Form Rules</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#111-email-blacklist" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">11.1 Email Blacklist</a></li><li><a href="#112-required-token-and-actionhostname-verification" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">11.2 Required Token and Action&#x2f;Hostname Verification</a></li><li><a href="#113-server-side-message-validation" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">11.3 Server-Side Message Validation</a></li><li><a href="#114-order-of-checks" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">11.4 Order of Checks</a></li></ul></li><li><a href="#12-reference-handler" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">12. Reference Handler</a></li><li><a href="#13-replication-checklist" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">13. Replication Checklist</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#cloudflare" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Cloudflare</a></li><li><a href="#contentbox" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">ContentBox</a></li><li><a href="#coldbox--module" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">ColdBox &#x2f; Module</a></li><li><a href="#form" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Form</a></li><li><a href="#server" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Server</a></li></ul></li><li><a href="#14-test-plan" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">14. Test Plan</a><ul class="mt-2 ml-3 space-y-1 text-xs" role="list"><li><a href="#functional-tests" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Functional Tests</a></li><li><a href="#negative-tests" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Negative Tests</a></li><li><a href="#operational-tests" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">Operational Tests</a></li></ul></li><li><a href="#15-limitations-and-recommended-improvements" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">15. Limitations and Recommended Improvements</a></li><li><a href="#16-summary-for-a-new-implementation" class="block text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">16. Summary for a New Implementation</a></li></ul>
+						</div>
+					</aside>
+
+
+				</div>
+			</main>
+
+		</div>
+	</div>
+
+	<!-- BxSites JS Assets -->
+	<script src="/assets/vendor/highlight/highlight.min.js"></script>
+	<script src="/assets/highlight-boxlang.js"></script>
+	<script>
+		// Highlight all fenced code blocks after Highlight.js and
+		// the custom BoxLang grammar have been loaded.
+		hljs.highlightAll();
+	</script>
+	<script src="/assets/tabs.js"></script>
+	<script src="/assets/admonition-collapse.js"></script>
+	<script src="/assets/copy-code.js"></script>
+	<script src="/assets/code-lines.js"></script>
+	<script src="/assets/prompt-init.js"></script>
+
+	<!-- Client JavaScript -->
+	<script>
+		const themeToggle = document.getElementById("themeToggle");
+		const moonIcon = document.getElementById("moonIcon");
+		const sunIcon = document.getElementById("sunIcon");
+
+		function updateThemeIcons() {
+			const isDark = document.documentElement.classList.contains("dark");
+			moonIcon.classList.toggle("hidden", !isDark);
+			sunIcon.classList.toggle("hidden", isDark);
+		}
+
+		themeToggle.addEventListener("click", () => {
+			document.documentElement.classList.toggle("dark");
+			updateThemeIcons();
+		});
+
+		const mobileMenuButton = document.getElementById("mobileMenuButton");
+		const sidebar = document.getElementById("sidebar");
+
+		mobileMenuButton.addEventListener("click", () => {
+			sidebar.classList.toggle("hidden");
+		});
+	</script>
+</body>
+</html>
